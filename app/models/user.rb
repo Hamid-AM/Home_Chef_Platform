@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
-  validates :role, inclusion: { in: %w[client chef] }
+  validates :role, presence: true, inclusion: { in: %w[client chef] }
 
   has_one :chef, dependent: :destroy
   has_many :boockings, dependent: :destroy
