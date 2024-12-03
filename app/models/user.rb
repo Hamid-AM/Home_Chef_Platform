@@ -8,5 +8,5 @@ class User < ApplicationRecord
   validates :role, presence: true, inclusion: { in: %w[client chef] }
 
   has_one :chef, dependent: :destroy
-  has_many :boockings, dependent: :destroy
+  has_many :bookings, dependent: :destroy
 end
