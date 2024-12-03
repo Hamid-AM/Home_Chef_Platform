@@ -12,34 +12,67 @@ require 'faker'
 User.destroy_all
 Chef.destroy_all
 Menu.destroy_all
+Booking.destroy_all
 
-# Create Users
-puts "Creating users..."
-10.times do
-  user = User.create!(
-    email: Faker::Internet.email,
-    password: 'password',
-    name: Faker::Name.name
-  )
+user1 = User.create!(
+  name: 'Bob',
+  email: 'bob@gmail.com',
+  password: 'password123',
+  role: 'client'
+)
 
-  # Create Chefs (1 out of every 2 users becomes a chef)
-  if rand(2).even?
-    chef = Chef.create!(
-      user: user,
-      biography: Faker::Lorem.paragraph(sentence_count: 2),
-      specialties: Faker::Food.ethnic_category,
-      availability: "Weekdays, Weekends",
-      location: Faker::Address.city
-    )
+user2 = User.create!(
+  name: 'karl',
+  email: 'karl@gmail.com',
+  password: 'password123',
+  role: 'client'
+)
 
-    # Create Menus for the chef
-    rand(1..3).times do
-      Menu.create!(
-        chef: chef,
-        title: Faker::Food.dish,
-        description: Faker::Food.description,
-        price: rand(15..100)
-      )
-    end
-  end
-end
+# Creating a sample chef user
+chef_user = User.create!(
+  name: 'stef',
+  email: 'stef@gmail.com',
+  password: 'password123',
+  role: 'chef'
+)
+
+chef1 = Chef.create!(
+  user: chef_user,
+  name: 'stef',
+  specialties: Faker::Food.dish,
+  biography: Faker::Lorem.paragraph(sentence_count: 3),
+  availability: 'Monday to Friday, 10am - 6pm',
+  location: Faker::Address.city
+)
+
+menu1 = Menu.create!(
+  chef: chef1,
+  title: Faker::Food.dish,
+  description: Faker::Food.description,
+  price: Faker::Commerce.price(range: 10..50)
+)
+
+menu2 = Menu.create!(
+  chef: chef1,
+  title: Faker::Food.dish,
+  description: Faker::Food.description,
+  price: Faker::Commerce.price(range: 10..50)
+)
+
+Booking.create!(
+  user: user1,
+  menu: menu1,
+  date: Faker::Time.forward(days: 10, period: :morning),
+  time: Faker::Time.forward(days: 10, period: :evening),
+  status: ['pending', 'confirmed', 'cancelled'].sample,
+  notes: Faker::Lorem.sentence(word_count: 10)
+)
+
+Booking.create!(
+  user: user2,
+  menu: menu2,
+  date: Faker::Time.forward(days: 10, period: :morning),
+  time: Faker::Time.forward(days: 10, period: :evening),
+  status: ['pending', 'confirmed', 'cancelled'].sample,
+  notes: Faker::Lorem.sentence(word_count: 10)
+)
