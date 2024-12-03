@@ -1,2 +1,25 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://www.miummium.com/img/chefs-city/2019/79/79-aakf58.jpg);">
+  <div class="container">
+    <h1>Welkom to a <strong>HOME CHEF!</strong>!</h1>
+    <p class="text-capitalize font-italic">Talented chefs, delicious meals, right at your home with just a click.</p>
+  </div>
+</div>
+
+<main>
+    <div class="cards">
+        <section id="hero">
+            <h2>Réservez un Chef à Domicile</h2>
+            <p>Offrez-vous une expérience culinaire inoubliable avec un chef qui prépare un menu sur mesure chez vous.</p>
+            <button>Voir les Chefs Disponibles</button>
+        </section>
+        <section id="hero">
+            <h2>Notre Concept</h2>
+            <p>Chefs à Domicile vous propose une expérience culinaire unique, avec des chefs sélectionnés pour leur talent et leur créativité.</p>
+            <div class="photos">
+                <%= image_tag("chef1.jpg", size: "300x200", alt: "Chef en action", class: "photo") %>
+                <%= image_tag("chef3.jpg", size: "300x200", alt: "Plat gastronomique", class: "photo") %>
+                <%= image_tag("chef2.jpg", size: "300x200", alt: "Dîner préparé", class: "photo") %>
+            </div>
+        </section>
+    </div>
+</main>
