@@ -1,0 +1,17 @@
+<h1>Reviews</h1>
+
+<% if @booking.reviews.any? %>
+  <ul>
+    <% @booking.reviews.each do |review| %>
+      <li>
+        <%= review.rating %> - <%= review.comment %>
+        <%= link_to 'Edit', edit_review_path(review), class: 'btn btn-secondary' %> |
+        <%= link_to 'Delete', review, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No reviews yet.</p>
+<% end %>
+
+<%= render 'form' %>

@@ -10,10 +10,11 @@
 
 require 'faker'
 
-User.destroy_all
-Chef.destroy_all
-Menu.destroy_all
+Review.destroy_all
 Booking.destroy_all
+Menu.destroy_all
+Chef.destroy_all
+User.destroy_all
 
 Menu.create!([
   {
@@ -75,15 +76,14 @@ user1 = User.create!(
 )
 
 user2 = User.create!(
-  name: 'karl',
+  name: 'Karl',
   email: 'karl@gmail.com',
   password: 'password123',
   role: 'client'
 )
 
-# Creating a sample chef user
 chef_user = User.create!(
-  name: 'stef',
+  name: 'Stef',
   email: 'stef@gmail.com',
   password: 'password123',
   role: 'chef'
@@ -91,41 +91,49 @@ chef_user = User.create!(
 
 chef1 = Chef.create!(
   user: chef_user,
-  name: 'stef',
+  name: 'Chef Stef',
   specialties: Faker::Food.dish,
   biography: Faker::Lorem.paragraph(sentence_count: 3),
   availability: 'Monday to Friday, 10am - 6pm',
   location: Faker::Address.city
 )
 
-menu1 = Menu.create!(
-  chef: chef1,
-  title: Faker::Food.dish,
-  description: Faker::Food.description,
-  price: Faker::Commerce.price(range: 10..50)
-)
+puts "Created Chef: #{chef1.name}."
 
-menu2 = Menu.create!(
-  chef: chef1,
-  title: Faker::Food.dish,
-  description: Faker::Food.description,
-  price: Faker::Commerce.price(range: 10..50)
-)
+menus = []
+3.times do
+  menus << Menu.create!(
+    chef: chef1,
+    title: Faker::Food.dish,
+    description: Faker::Food.description,
+    price: Faker::Commerce.price(range: 10..50)
+  )
+end
 
-Booking.create!(
+bookings = []
+bookings << Booking.create!(
   user: user1,
-  menu: menu1,
-  date: Faker::Time.forward(days: 10, period: :morning),
+  menu: menus.sample,
+  date: Faker::Date.forward(days: 10),
   time: Faker::Time.forward(days: 10, period: :evening),
   status: ['pending', 'confirmed', 'cancelled'].sample,
   notes: Faker::Lorem.sentence(word_count: 10)
 )
 
-Booking.create!(
+bookings << Booking.create!(
   user: user2,
-  menu: menu2,
-  date: Faker::Time.forward(days: 10, period: :morning),
-  time: Faker::Time.forward(days: 10, period: :evening),
+  menu: menus.sample,
+  date: Faker::Date.forward(days: 15),
+  time: Faker::Time.forward(days: 15, period: :morning),
   status: ['pending', 'confirmed', 'cancelled'].sample,
   notes: Faker::Lorem.sentence(word_count: 10)
 )
+
+bookings.each do |booking|
+  Review.create!(
+    booking: booking,
+    user: booking.user,
+    rating: rand(1..5),
+    comment: Faker::Lorem.sentence(word_count: 15)
+  )
+end
