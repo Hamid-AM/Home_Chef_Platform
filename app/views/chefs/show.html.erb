@@ -8,7 +8,7 @@
   <div>
     <h3><%= menu.title %></h3>
     <p><%= menu.description %></p>
-    <p>Price: <%= number_to_currency(menu.price, unit : "€") %></p>
+    <p>Price: <%= number_to_currency(menu.price, unit: "€") %></p>
   </div>
 <% end %>
 <%= link_to 'Add Menu', new_chef_menu_path(@chef) %>
