@@ -1,0 +1,13 @@
+<%= simple_form_for [@booking, @review] do |f| %>
+  <div class="form-group">
+    <%= f.association :rating, as: :select, collection: [1, 2, 3, 4, 5], label: 'Note', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :comment, as: :text, label: 'Commentaire', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Ajouter un avis", class: "btn btn-primary" %>
+  </div>
+<% end %>
