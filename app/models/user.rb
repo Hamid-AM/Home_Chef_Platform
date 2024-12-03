@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   has_one :chef, dependent: :destroy
   has_many :bookings, dependent: :destroy
+  has_many :reviews
 end
