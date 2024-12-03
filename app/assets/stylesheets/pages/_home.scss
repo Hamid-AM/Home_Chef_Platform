@@ -6,15 +6,15 @@ h1 {
   margin: 0;
 }
 
-//#hero {
-  //background: #fff;
-  //padding: 2em;
-  //border-radius: 10px;
-  //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  //width: 80%;
-  //max-width: 100%;
-  //margin-top: 1em;
-//}
+#hero {
+  background: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 100%;
+  margin-top: 1em;
+}
 
 h2 {
   font-size: 2em;
@@ -33,8 +33,43 @@ p {
   margin-left: 10%;
 }
 
+button {
+  padding: 1em 2em;
+  font-size: 1em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+
 #concept {
   background-color: #fff;
   color: black;
 }
 
+.photos {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+
+.photo {
+  max-width: 30%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
