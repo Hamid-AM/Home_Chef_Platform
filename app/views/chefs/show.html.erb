@@ -1,0 +1,14 @@
+<h1><%= @chef.name %></h1>
+<p><%= @chef.biography %></p>
+<p>Specialties: <%= @chef.specialties %></p>
+<p>Availability: <%= @chef.availability %></p>
+
+<h2>Menus</h2>
+<% @chef.menus.each do |menu| %>
+  <div>
+    <h3><%= menu.title %></h3>
+    <p><%= menu.description %></p>
+    <p>Price: <%= number_to_currency(menu.price, unit : "€") %></p>
+  </div>
+<% end %>
+<%= link_to 'Add Menu', new_chef_menu_path(@chef) %>
