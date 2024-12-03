@@ -16,58 +16,6 @@ Menu.destroy_all
 Chef.destroy_all
 User.destroy_all
 
-Menu.create!([
-  {
-    chef_id: 1,
-    title: "Gourmet Burger",
-    description: "A delicious gourmet burger with truffle mayo and aged cheddar.",
-    price: 15.99,
-  },
-  {
-    chef_id: 2,
-    title: "Vegan Delight",
-    description: "A plant-based dish featuring seasonal vegetables and quinoa.",
-    price: 49,
-  },
-  {
-    chef_id: 3,
-    title: "Seafood Pasta",
-    description: "Fresh pasta with a creamy seafood sauce and herbs.",
-    price: 109,
-  },
-  {
-    chef_id: 2,
-    title: "Steak and Potatoes",
-    description: "Juicy ribeye steak served with garlic mashed potatoes and grilled asparagus.",
-    price: 79,
-  },
-  {
-    chef_id: 3,
-    title: "Thai Green Curry",
-    description: "Spicy and flavorful green curry with chicken, coconut milk, and fresh basil.",
-    price: 14.75,
-  },
-  {
-    chef_id: 4,
-    title: "Sushi Platter",
-    description: "An assortment of fresh sushi rolls, nigiri, and sashimi.",
-    price: 22.50,
-  },
-  {
-    chef_id: 2,
-    title: "Pizza Margherita",
-    description: "Classic Italian pizza with fresh mozzarella, basil, and tomatoes.",
-    price: 11.99,
-  },
-  {
-    chef_id: 5,
-    title: "Mediterranean Platter",
-    description: "Hummus, falafel, tabbouleh, and pita bread served with a side of tzatziki.",
-    price: 16.25,
-  }
-])
-
-
 user1 = User.create!(
   name: 'Bob',
   email: 'bob@gmail.com',
@@ -97,8 +45,6 @@ chef1 = Chef.create!(
   availability: 'Monday to Friday, 10am - 6pm',
   location: Faker::Address.city
 )
-
-puts "Created Chef: #{chef1.name}."
 
 menus = []
 3.times do
