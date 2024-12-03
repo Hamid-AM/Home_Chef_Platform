@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  # root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -9,11 +9,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :chefs do
-    resources :reviews, only: [:create, :destroy, :edit, :update]
-  end
 
   resources :bookings do
     resources :reviews, only: [:create]
   end
+
+  resources :chefs do
+    resources :menus, except: [:show]
+  end
+  
+  resources :reviews,  only: [:edit, :update, :destroy]
+  root 'chefs#index'
 end

@@ -1,0 +1,23 @@
+<h1>Book a Menu</h1>
+
+<%= simple_form_for @booking, html: { class: 'booking-form' } do |form| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.input :date, as: :datetime_local, label: 'Booking Date & Time', input_html: { value: Time.now } %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.input :status, collection: ['pending', 'confirmed', 'cancelled'], include_blank: false, label: 'Booking Status' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.input :notes, as: :text, label: 'Additional Notes', input_html: { rows: 3 } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Book Menu", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Menu', chef_menu_path(@menu.chef, @menu), class: 'btn btn-secondary' %>
