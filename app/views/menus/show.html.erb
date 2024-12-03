@@ -1,0 +1,6 @@
+<h1><%= @menu.title %></h1>
+<p><%= @menu.description %></p>
+<p>Price: <%= number_to_currency(@menu.price) %></p>
+
+<%= link_to 'Edit Menu', edit_chef_menu_path(@chef, @menu), class: 'btn btn-primary' %> |
+<%= link_to 'Back to Menus', chef_menus_path(@chef), class: 'btn btn-secondary' %>
