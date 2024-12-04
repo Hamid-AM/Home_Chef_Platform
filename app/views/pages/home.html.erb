@@ -1,2 +1,11 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Welcome to the Home Chef Platform!</h1>
+
+<h2>Our Chefs:</h2>
+<ul>
+  <% @chefs.each do |chef| %>
+    <li>
+      <strong><%= chef.name %></strong><br>
+      <%= chef.specialties %>
+    </li>
+  <% end %>
+</ul>
