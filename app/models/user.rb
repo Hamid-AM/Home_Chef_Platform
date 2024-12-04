@@ -4,18 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, presence: true
+  enum role: { client: 'client', chef: 'chef' }
   validates :role, presence: true, inclusion: { in: %w[client chef] }
+  validates :name, presence: true
 
-  has_one :chef, dependent: :destroy
-  has_many :bookings, dependent: :destroy
+  has_many :menus, foreign_key: :user_id, dependent: :destroy
+  has_many :bookings
   has_many :reviews
-
-  def chef?
-    role == 'chef'
-  end
-
-  def client?
-    role == 'client'
-  end
 end

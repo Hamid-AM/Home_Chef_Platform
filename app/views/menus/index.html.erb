@@ -1,14 +1,16 @@
-<h1>Menus for <%= @chef.name %></h1>
-<%= link_to 'Add New Menu', new_chef_menu_path(@chef), class: 'btn btn-primary' %>
+<h1>All Menus</h1>
 
-<% @menus.each do |menu| %>
-  <div>
-    <h3><%= link_to menu.title, chef_menu_path(@chef, menu) %></h3>
-    <p><%= menu.description %></p>
-    <p>Price: <%= number_to_currency(menu.price) %></p>
-    <% if (current_user == "chef") %>
-      <%= link_to 'Edit', edit_chef_menu_path(@chef, menu), class: 'btn btn-secondary' %> |
-      <%= link_to 'Delete', chef_menu_path(@chef, menu), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-    <%end%>
-  </div>
-<% end %>
+<div class="row">
+  <% @menus.each do |menu| %>
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><%= menu.title %></h5>
+          <p class="card-text"><%= truncate(menu.description, length: 100) %></p>
+          <p><strong>Price:</strong> <%= number_to_currency(menu.price) %></p>
+          <%= link_to 'View Menu', menu_path(menu), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

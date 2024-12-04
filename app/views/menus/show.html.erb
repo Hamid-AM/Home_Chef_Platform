@@ -1,6 +1,50 @@
+<!-- app/views/menus/show.html.erb -->
 <h1><%= @menu.title %></h1>
-<p><%= @menu.description %></p>
-<p>Price: <%= number_to_currency(@menu.price) %></p>
+<p><strong>Description:</strong> <%= @menu.description %></p>
+<p><strong>Price:</strong> <%= number_to_currency(@menu.price) %></p>
 
-<%= link_to 'Edit Menu', edit_chef_menu_path(@chef, @menu), class: 'btn btn-primary' %> |
-<%= link_to 'Back to Menus', chef_menus_path(@chef), class: 'btn btn-secondary' %>
+<div>
+  <% if current_user&.client? %>
+    <%= link_to 'Book This Menu', menu_bookings_path(@menu), method: :post, class: 'btn btn-success' %>
+  <% elsif current_user&.chef? && current_user == @menu.user %>
+    <%= link_to 'Edit', edit_menu_path(@menu), class: 'btn btn-warning' %>
+    <%= link_to 'Delete', menu_path(@menu), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% end %>
+</div>
+
+<% if current_user&.client? %>
+  <%= form_with url: menu_bookings_path(@menu), local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :time %>
+      <%= f.time_field :time, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :notes %>
+      <%= f.text_area :notes, class: 'form-control' %>
+    </div>
+    <%= f.submit 'Book This Menu', class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+
+
+<h2>Reviews</h2>
+
+<div>
+  <%= render 'reviews/form', menu: @menu if current_user&.client? %>
+</div>
+
+<ul>
+  <% @menu.reviews.each do |review| %>
+    <li>
+      <strong><%= review.user.name %></strong>: <%= review.rating %>/5<br>
+      <%= review.comment %>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= link_to 'Back to All Menus', menus_path, class: 'btn btn-secondary' %>

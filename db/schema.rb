@@ -10,53 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_03_160437) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_04_202853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bookings", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "menu_id", null: false
-    t.string "status"
+    t.date "date"
+    t.time "time"
+    t.decimal "total_price"
+    t.string "status", default: "pending"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "date"
-    t.datetime "time"
     t.index ["menu_id"], name: "index_bookings_on_menu_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "chefs", force: :cascade do |t|
-    t.string "name"
-    t.string "specialties"
-    t.text "biography"
-    t.string "availability"
-    t.string "location"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_chefs_on_user_id"
-  end
-
   create_table "menus", force: :cascade do |t|
-    t.bigint "chef_id", null: false
     t.string "title"
     t.text "description"
     t.decimal "price"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["chef_id"], name: "index_menus_on_chef_id"
+    t.index ["user_id"], name: "index_menus_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "menu_id", null: false
     t.bigint "booking_id", null: false
     t.integer "rating"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booking_id"], name: "index_reviews_on_booking_id"
+    t.index ["menu_id"], name: "index_reviews_on_menu_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -70,14 +61,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_03_160437) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "role", default: "client", null: false
+    t.string "specialties"
+    t.text "biography"
+    t.string "availability"
+    t.string "location"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "bookings", "menus"
   add_foreign_key "bookings", "users"
-  add_foreign_key "chefs", "users"
-  add_foreign_key "menus", "chefs"
+  add_foreign_key "menus", "users"
   add_foreign_key "reviews", "bookings"
+  add_foreign_key "reviews", "menus"
   add_foreign_key "reviews", "users"
 end

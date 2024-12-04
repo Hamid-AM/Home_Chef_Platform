@@ -1,0 +1,38 @@
+<h1><%= @user.name %>'s Profile</h1>
+
+<% if @user.role == 'chef' %>
+  <p><strong>Specialties:</strong> <%= @user.specialties %></p>
+  <p><strong>Biography:</strong> <%= @user.biography %></p>
+  <p><strong>Location:</strong> <%= @user.location %></p>
+
+  <h2>Your Menus</h2>
+  <% if @menus.any? %>
+    <ul>
+      <% @menus.each do |menu| %>
+        <li>
+          <%= menu.title %> - <%= menu.description %>
+          <%= link_to 'Edit', edit_user_menu_path(@user, menu) %> |
+          <%= link_to 'Delete', user_menu_path(@user, menu), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have not created any menus yet.</p>
+  <% end %>
+  <%= link_to 'Create a New Menu', new_user_menu_path(@user) %>
+
+<% else %> <!-- For client view -->
+  <h2>Available Menus</h2>
+  <% if @menus.any? %>
+    <ul>
+      <% @menus.each do |menu| %>
+        <li>
+          <%= menu.title %> - <%= menu.description %>
+          <%= link_to 'Book This Menu', menu_bookings_path(menu), method: :post %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No menus are available at the moment.</p>
+  <% end %>
+<% end %>

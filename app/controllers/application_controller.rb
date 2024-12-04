@@ -9,9 +9,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :role])
   end
 
-  private
-
   def set_specialties
-    @specialties = Chef.distinct.pluck(:specialties)
+    @specialties = User.where(role: 'chef').distinct.pluck(:specialties)
   end
 end
