@@ -1,0 +1,44 @@
+/* Centrer le formulaire avec une marge plus proche de la navbar */
+.form-container {
+  display: flex;                     /* Active Flexbox */
+  justify-content: center;           /* Centre horizontalement */
+  align-items: flex-start;           /* Aligne le formulaire en haut du conteneur (proche de la navbar) */
+  min-height: 80vh;                  /* Utilise 80% de la hauteur de la fenêtre, au lieu de 100% */
+  text-align: center;                /* Centre le texte dans le formulaire */
+  background-color: #f9f9f9;         /* Arrière-plan léger, ajustable */
+  padding-top: 40px;                 /* Ajoute un peu d'espace au-dessus du formulaire */
+}
+
+.form-container .simple_form {
+  width: 100%;                       /* Le formulaire occupe toute la largeur disponible */
+  max-width: 600px;                  /* Largeur maximale du formulaire */
+  padding: 20px;                     /* Espacement interne du formulaire */
+  border: 1px solid #ddd;            /* Bordure légère */
+  border-radius: 8px;                /* Coins arrondis */
+  background-color: #fff;            /* Arrière-plan blanc pour le formulaire */
+}
+
+.form-container .form-group {
+  margin-bottom: 20px;               /* Espacement entre les champs du formulaire */
+}
+
+/* Style pour le titre h1, centré comme le formulaire */
+h1 {
+  text-align: center;                /* Centre le titre horizontalement */
+  margin-bottom: 30px;               /* Ajoute un espace sous le titre */
+}
+
+/* Pour le bouton : rendre le bouton moins large */
+.form-container .btn {
+  width: auto;                       /* Rend le bouton moins large */
+  padding: 10px 20px;                /* Espacement interne du bouton */
+  margin-top: 20px;                  /* Un peu d'espace au-dessus du bouton */
+  border-radius: 8px;                /* Coins arrondis pour le bouton */
+  background-color: #007bff;         /* Couleur de fond du bouton */
+  color: white;                      /* Couleur du texte du bouton */
+  border: none;                      /* Enlève la bordure du bouton */
+}
+
+.form-container .btn:hover {
+  background-color: #0056b3;         /* Couleur du bouton au survol */
+}

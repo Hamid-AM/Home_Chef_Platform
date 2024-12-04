@@ -4,6 +4,7 @@
       <%= image_tag "logo-home_chef.jpg" %>
     <% end %>
 
+
     <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%; border-radius: 8px;" method="get" action="<%= chefs_path %>">
       
       <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search" style="border-radius: 8px;">
@@ -17,6 +18,7 @@
       </select>
 
 
+
       <button class="btn btn-outline-success" type="submit" style="border-radius: 8px;">Search</button>
     </form>
 
@@ -28,7 +30,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Messages", "#", class: "nav-link" %>
@@ -37,11 +39,18 @@
             <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= image_tag "Chef_profile.jpg", class: "avatar", alt: "dropdown menu" %>
             </a>
+
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Profile", "#", class: "dropdown-item" %>
-              <%= link_to "Booking", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <% if current_user.chef? %>
+                <%= link_to "Profile", edit_chef_path(current_user.chef), class: "dropdown-item" %>
+              <% elsif current_user.client? %>
+                <span class="dropdown-item disabled"><%= current_user.name %></span>
+              <% end %>
+              <%= link_to "Manage Menus", chef_menus_path(current_user.chef), class: "dropdown-item" %>
+              <%= link_to "My Bookings", bookings_path, class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
             </div>
+
           </li>
         <% else %>
           <li class="nav-item">

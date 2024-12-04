@@ -1,0 +1,12 @@
+<h1>Chef Profile</h1>
+
+<div class="form-container">
+
+  <%= simple_form_for @chef do |f| %>
+    <%= f.input :biography, label: "Biography", as: :text, rows: 5 %>
+    <%= f.input :specialties, label: "Specialities", as: :text, rows: 3 %>
+    <%= f.input :availability, label: "Availability", as: :text, rows: 3 %>
+
+    <%= f.button :submit, "Edit Profile", class: "btn" %>
+  <% end %>
+</div>

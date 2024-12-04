@@ -6,7 +6,9 @@
     <h3><%= link_to menu.title, chef_menu_path(@chef, menu) %></h3>
     <p><%= menu.description %></p>
     <p>Price: <%= number_to_currency(menu.price) %></p>
-    <%= link_to 'Edit', edit_chef_menu_path(@chef, menu), class: 'btn btn-secondary' %> |
-    <%= link_to 'Delete', chef_menu_path(@chef, menu), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <% if (current_user == "chef") %>
+      <%= link_to 'Edit', edit_chef_menu_path(@chef, menu), class: 'btn btn-secondary' %> |
+      <%= link_to 'Delete', chef_menu_path(@chef, menu), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <%end%>
   </div>
 <% end %>
