@@ -9,6 +9,22 @@
     <h3><%= menu.title %></h3>
     <p><%= menu.description %></p>
     <p>Price: <%= number_to_currency(menu.price, unit: "€") %></p>
+    <% if (current_user.role == "chef") %>
+      <span><%= link_to 'Edit', edit_chef_menu_path(chef_id: @chef.id, id: menu.id), class: 'btn btn-success'%> -
+      <%= link_to "Delete", chef_menu_path(@chef, menu), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger' %>
+      </span>
+    <% end %>
   </div>
 <% end %>
-<%= link_to 'Add Menu', new_chef_menu_path(@chef) %>
+<% if (current_user.role == "chef") %>
+  <%= link_to 'Add Menu', new_chef_menu_path(@chef), class: 'btn btn-info' %>
+<% end %>
+
+<%# TODO : (Rob) A corriger. J'ai du faire cet enchainement de br car le footer passe au-dessus du contenu %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

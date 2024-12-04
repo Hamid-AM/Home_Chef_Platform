@@ -27,7 +27,7 @@ class MenusController < ApplicationController
 
   def update
     if @menu.update(menu_params)
-      redirect_to chef_menu_path(@chef, @menu)
+      redirect_to chef_path(@chef, @menu)
     else
       render :edit
     end
@@ -35,7 +35,7 @@ class MenusController < ApplicationController
 
   def destroy
     @menu.destroy
-    redirect_to chef_menus_path(@chef)
+    redirect_to chef_path(@chef)
   end
 
   private
