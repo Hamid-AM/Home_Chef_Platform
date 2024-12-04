@@ -37,9 +37,41 @@ chef_user = User.create!(
   role: 'chef'
 )
 
+chef_user = User.create!(
+  name: 'Juan',
+  email: 'juan@gmail.com',
+  password: 'password123',
+  role: 'chef'
+)
+
+chef_user = User.create!(
+  name: 'Rob',
+  email: 'rob@gmail.com',
+  password: 'password123',
+  role: 'chef'
+)
+
 chef1 = Chef.create!(
   user: chef_user,
   name: 'Chef Stef',
+  specialties: Faker::Food.dish,
+  biography: Faker::Lorem.paragraph(sentence_count: 3),
+  availability: 'Monday to Friday, 10am - 6pm',
+  location: Faker::Address.city
+)
+
+chef2 = Chef.create!(
+  user: chef_user,
+  name: 'Chef Juan',
+  specialties: Faker::Food.dish,
+  biography: Faker::Lorem.paragraph(sentence_count: 3),
+  availability: 'Monday to Friday, 10am - 6pm',
+  location: Faker::Address.city
+)
+
+chef3 = Chef.create!(
+  user: chef_user,
+  name: 'Chef Rob',
   specialties: Faker::Food.dish,
   biography: Faker::Lorem.paragraph(sentence_count: 3),
   availability: 'Monday to Friday, 10am - 6pm',
@@ -50,6 +82,26 @@ menus = []
 3.times do
   menus << Menu.create!(
     chef: chef1,
+    title: Faker::Food.dish,
+    description: Faker::Food.description,
+    price: Faker::Commerce.price(range: 10..50)
+  )
+end
+
+menus = []
+3.times do
+  menus << Menu.create!(
+    chef: chef2,
+    title: Faker::Food.dish,
+    description: Faker::Food.description,
+    price: Faker::Commerce.price(range: 10..50)
+  )
+end
+
+menus = []
+3.times do
+  menus << Menu.create!(
+    chef: chef3,
     title: Faker::Food.dish,
     description: Faker::Food.description,
     price: Faker::Commerce.price(range: 10..50)
