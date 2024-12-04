@@ -1,0 +1,21 @@
+.chefs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajuste automatiquement le nombre de colonnes */
+  gap: 20px; /* Espace entre les cartes */
+  margin: 20px; /* Espace autour de la grille */
+}
+.chef-card {
+  border: 1px solid #ddd; /* Optionnel : bordure des cartes */
+  border-radius: 8px; /* Optionnel : arrondi des coins */
+  overflow: hidden; /* Coupe tout contenu qui dépasse */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel : ombre pour l'esthétique */
+}
+.chef-image img {
+  width: 100%; /* Image à la largeur complète de la carte */
+  height: auto; /* Maintenir les proportions de l'image */
+}
+.chef-info {
+  padding: 10px; /* Espacement interne pour le contenu textuel */
+  text-align: center; /* Centrer le texte */
+}
+

@@ -1,7 +1,19 @@
- <h1>All Chefs</h1>
-<% @chefs.each do |chef| %>
-  <div>
-    <h3><%= link_to chef.name, chef_path(chef) %></h3>
-    <p><%= chef.specialties %></p>
-  </div>
-<% end %>
+<%= render "shared/banner" %>
+
+<div class="chefs-grid">
+  <% @chefs.each do |chef| %>
+    <div
+      class="chef-card"
+      data-controller="chef-card"
+      onclick="window.location.href='<%= chef_path(chef) %>'"
+>
+      <div class="chef-image">
+        <%= image_tag "Chef_Stef.jpeg" %>
+      </div>
+      <div class="chef-info">
+        <h3><%= chef.name %></h3>
+        <p><%= chef.specialties %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
