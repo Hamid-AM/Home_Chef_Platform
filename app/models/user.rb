@@ -10,4 +10,12 @@ class User < ApplicationRecord
   has_one :chef, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :reviews
+
+  def chef?
+    role == 'chef'
+  end
+
+  def client?
+    role == 'client'
+  end
 end
