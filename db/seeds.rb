@@ -88,7 +88,6 @@ menus = []
   )
 end
 
-menus = []
 3.times do
   menus << Menu.create!(
     chef: chef2,
@@ -98,7 +97,6 @@ menus = []
   )
 end
 
-menus = []
 3.times do
   menus << Menu.create!(
     chef: chef3,
