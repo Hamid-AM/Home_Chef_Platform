@@ -6,7 +6,7 @@
 
 
     <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%; border-radius: 8px;" method="get" action="<%= chefs_path %>">
-      
+
       <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search" style="border-radius: 8px;">
 
 
@@ -46,7 +46,7 @@
               <% elsif current_user.client? %>
                 <span class="dropdown-item disabled"><%= current_user.name %></span>
               <% end %>
-              <%= link_to "Manage Menus", chef_menus_path(current_user.chef), class: "dropdown-item" %>
+              <%# <%= link_to "Manage Menus", chef_menus_path(current_user.chef), class: "dropdown-item" %>
               <%= link_to "My Bookings", bookings_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
             </div>

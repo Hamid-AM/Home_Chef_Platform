@@ -16,7 +16,7 @@ class MenusController < ApplicationController
   def create
     @menu = @chef.menus.new(menu_params)
     if @menu.save
-      redirect_to chef_menu_path(@chef, @menu)
+      redirect_to chef_path(@chef, @menu)
     else
       render :new
     end
