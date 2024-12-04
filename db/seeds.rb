@@ -37,14 +37,14 @@ chef_user = User.create!(
   role: 'chef'
 )
 
-chef_user = User.create!(
+chef_user1 = User.create!(
   name: 'Juan',
   email: 'juan@gmail.com',
   password: 'password123',
   role: 'chef'
 )
 
-chef_user = User.create!(
+chef_user2 = User.create!(
   name: 'Rob',
   email: 'rob@gmail.com',
   password: 'password123',
@@ -61,7 +61,7 @@ chef1 = Chef.create!(
 )
 
 chef2 = Chef.create!(
-  user: chef_user,
+  user: chef_user1,
   name: 'Chef Juan',
   specialties: Faker::Food.dish,
   biography: Faker::Lorem.paragraph(sentence_count: 3),
@@ -70,7 +70,7 @@ chef2 = Chef.create!(
 )
 
 chef3 = Chef.create!(
-  user: chef_user,
+  user: chef_user2,
   name: 'Chef Rob',
   specialties: Faker::Food.dish,
   biography: Faker::Lorem.paragraph(sentence_count: 3),
