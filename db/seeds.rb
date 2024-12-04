@@ -10,126 +10,64 @@
 
 require 'faker'
 
-Review.destroy_all
-Booking.destroy_all
-Menu.destroy_all
-Chef.destroy_all
 User.destroy_all
 
-user1 = User.create!(
-  name: 'Bob',
-  email: 'bob@gmail.com',
-  password: 'password123',
-  role: 'client'
-)
-
-user2 = User.create!(
-  name: 'Karl',
-  email: 'karl@gmail.com',
-  password: 'password123',
-  role: 'client'
-)
-
-chef_user = User.create!(
-  name: 'Stef',
-  email: 'stef@gmail.com',
-  password: 'password123',
-  role: 'chef'
-)
-
-chef_user1 = User.create!(
-  name: 'Juan',
-  email: 'juan@gmail.com',
-  password: 'password123',
-  role: 'chef'
-)
-
-chef_user2 = User.create!(
-  name: 'Rob',
-  email: 'rob@gmail.com',
-  password: 'password123',
-  role: 'chef'
-)
-
-chef1 = Chef.create!(
-  user: chef_user,
-  name: 'Chef Stef',
-  specialties: Faker::Food.dish,
-  biography: Faker::Lorem.paragraph(sentence_count: 3),
-  availability: 'Monday to Friday, 10am - 6pm',
-  location: Faker::Address.city
-)
-
-chef2 = Chef.create!(
-  user: chef_user1,
-  name: 'Chef Juan',
-  specialties: Faker::Food.dish,
-  biography: Faker::Lorem.paragraph(sentence_count: 3),
-  availability: 'Monday to Friday, 10am - 6pm',
-  location: Faker::Address.city
-)
-
-chef3 = Chef.create!(
-  user: chef_user2,
-  name: 'Chef Rob',
-  specialties: Faker::Food.dish,
-  biography: Faker::Lorem.paragraph(sentence_count: 3),
-  availability: 'Monday to Friday, 10am - 6pm',
-  location: Faker::Address.city
-)
-
-menus = []
-3.times do
-  menus << Menu.create!(
-    chef: chef1,
-    title: Faker::Food.dish,
-    description: Faker::Food.description,
-    price: Faker::Commerce.price(range: 10..50)
+5.times do
+  User.create!(
+    email: Faker::Internet.unique.email,
+    password: 'password123',
+    name: Faker::Name.name,
+    role: 'chef',
+    specialties: Faker::Food.dish,
+    biography: Faker::Lorem.paragraph(sentence_count: 3),
+    availability: ['Morning', 'Afternoon', 'Evening'].sample,
+    location: Faker::Address.city
   )
 end
 
-3.times do
-  menus << Menu.create!(
-    chef: chef2,
-    title: Faker::Food.dish,
-    description: Faker::Food.description,
-    price: Faker::Commerce.price(range: 10..50)
+5.times do
+  User.create!(
+    email: Faker::Internet.unique.email,
+    password: 'password123',
+    name: Faker::Name.name,
+    role: 'client',
+    specialties: nil,
+    biography: nil,
+    availability: nil,
+    location: Faker::Address.city
   )
 end
 
-3.times do
-  menus << Menu.create!(
-    chef: chef3,
-    title: Faker::Food.dish,
-    description: Faker::Food.description,
-    price: Faker::Commerce.price(range: 10..50)
-  )
+User.where(role: 'chef').each do |chef|
+  1.times do
+    chef.menus.create!(
+      title: Faker::Food.dish,
+      description: Faker::Food.description,
+      price: Faker::Commerce.price(range: 10.0..50.0)
+    )
+  end
 end
 
-bookings = []
-bookings << Booking.create!(
-  user: user1,
-  menu: menus.sample,
-  date: Faker::Date.forward(days: 10),
-  time: Faker::Time.forward(days: 10, period: :evening),
-  status: ['pending', 'confirmed', 'cancelled'].sample,
-  notes: Faker::Lorem.sentence(word_count: 10)
-)
+User.where(role: 'client').each do |client|
+  1.times do
+    menu = Menu.all.sample
+    client.bookings.create!(
+      menu_id: menu.id,
+      date: Faker::Date.forward(days: 10),
+      time: Faker::Time.forward(days: 10, period: :evening),
+      total_price: menu.price,
+      status: 'pending',
+      notes: Faker::Lorem.sentence
+    )
+  end
+end
 
-bookings << Booking.create!(
-  user: user2,
-  menu: menus.sample,
-  date: Faker::Date.forward(days: 15),
-  time: Faker::Time.forward(days: 15, period: :morning),
-  status: ['pending', 'confirmed', 'cancelled'].sample,
-  notes: Faker::Lorem.sentence(word_count: 10)
-)
-
-bookings.each do |booking|
-  Review.create!(
-    booking: booking,
-    user: booking.user,
+Booking.all.each do |booking|
+  booking.reviews.create!(
+    user_id: booking.user_id, # client
+    menu_id: booking.menu_id,
+    booking_id: booking.id,
     rating: rand(1..5),
-    comment: Faker::Lorem.sentence(word_count: 15)
+    comment: Faker::Lorem.paragraph(sentence_count: 2)
   )
 end
