@@ -5,7 +5,7 @@
     <% end %>
 
 
-    <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%; border-radius: 8px;" method="get" action="<%= chefs_path %>">
+    <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%; border-radius: 8px;" method="get" action="<%= users_path %>">
 
       <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search" style="border-radius: 8px;">
 
@@ -40,16 +40,16 @@
               <%= image_tag "Chef_profile.jpg", class: "avatar", alt: "dropdown menu" %>
             </a>
 
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <%# <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <% if current_user.chef? %>
-                <%= link_to "Profile", edit_chef_path(current_user.chef), class: "dropdown-item" %>
-              <% elsif current_user.client? %>
-                <span class="dropdown-item disabled"><%= current_user.name %></span>
-              <% end %>
-              <%# <%= link_to "Manage Menus", chef_menus_path(current_user.chef), class: "dropdown-item" %>
-              <%= link_to "My Bookings", bookings_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
-            </div>
+                <%# link_to "Profile", user_path(user_path.chef), class: "dropdown-item" %>
+              <%# elsif current_user.client? %>
+                <%# <span class="dropdown-item disabled"><%= current_user.name </span>%>
+              <%# end %>
+              <%# link_to "Manage Menus", chef_menus_path(current_user.chef), class: "dropdown-item" %>
+              <%#= link_to "My Bookings", bookings_path, class: "dropdown-item" %>
+              <%#= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
+            </div> %>
 
           </li>
         <% else %>

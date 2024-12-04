@@ -1,0 +1,10 @@
+<!-- app/views/users/index.html.erb -->
+<h1>Chefs</h1>
+
+<ul>
+  <% @chefs.each do |chef| %>
+    <li>
+      <%= link_to chef.name, user_path(chef) %> - <%= chef.specialties %>
+    </li>
+  <% end %>
+</ul>

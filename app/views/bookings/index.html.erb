@@ -1,0 +1,31 @@
+<h1>Your Bookings</h1>
+
+<% if current_user.client? %>
+  <h2>Bookings You've Made</h2>
+  <ul>
+    <% @bookings.each do |booking| %>
+      <li>
+        <strong>Menu:</strong> <%= link_to booking.menu.title, menu_path(booking.menu) %> <br>
+        <strong>Status:</strong> <%= booking.status %> <br>
+        <strong>Date:</strong> <%= booking.date %> at <%= booking.time.strftime('%H:%M') if booking.time %> <br>
+        <strong>Total Price:</strong> <%= number_to_currency(booking.total_price) %> <br>
+        <strong>Notes:</strong> <%= booking.notes %>
+      </li>
+    <% end %>
+  </ul>
+<% elsif current_user.chef? %>
+  <h2>Bookings for Your Menus</h2>
+  <ul>
+    <% @bookings.each do |booking| %>
+      <li>
+        <strong>Menu:</strong> <%= link_to booking.menu.title, menu_path(booking.menu) %> <br>
+        <strong>Client:</strong> <%= booking.user.name %> <br>
+        <strong>Date:</strong> <%= booking.date %> at <%= booking.time.strftime('%H:%M') if booking.time %> <br>
+        <strong>Status:</strong> <%= booking.status %> <br>
+        <strong>Notes:</strong> <%= booking.notes %>
+        <%= link_to 'Accept', booking_path(booking, status: 'accepted'), method: :patch, class: 'btn btn-success' %>
+        <%= link_to 'Reject', booking_path(booking, status: 'rejected'), method: :patch, class: 'btn btn-danger' %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

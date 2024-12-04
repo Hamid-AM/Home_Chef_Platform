@@ -1,7 +1,0 @@
- <h1>All Chefs</h1>
-<% @chefs.each do |chef| %>
-  <div>
-    <h3><%= link_to chef.name, chef_path(chef) %></h3>
-    <p><%= chef.specialties %></p>
-  </div>
-<% end %>
