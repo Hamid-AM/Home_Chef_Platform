@@ -4,8 +4,21 @@
       <%= image_tag "logo-home_chef.jpg" %>
     <% end %>
 
-    <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%; border-radius: 8px;">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="border-radius: 8px;">
+
+    <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%; border-radius: 8px;" method="get" action="<%= chefs_path %>">
+      
+      <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search" style="border-radius: 8px;">
+
+
+      <select class="form-control me-2" name="specialty" style="border-radius: 8px;">
+        <option value="">--Sélectionnez une spécialité--</option>
+        <% @specialties.each do |specialty| %>
+          <option value="<%= specialty %>"><%= specialty %></option>
+        <% end %>
+      </select>
+
+
+
       <button class="btn btn-outline-success" type="submit" style="border-radius: 8px;">Search</button>
     </form>
 

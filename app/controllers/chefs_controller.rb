@@ -2,8 +2,19 @@ class ChefsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_chef, only: [:show, :edit, :update]
 
+
   def index
-    @chefs = Chef.all
+    @specialties = Chef.distinct.pluck(:specialties)
+
+    if params[:query].present? && params[:specialty].present?
+      @chefs = Chef.where("specialties ILIKE ? AND name ILIKE ?", "%#{params[:specialty]}%", "%#{params[:query]}%")
+    elsif params[:query].present?
+      @chefs = Chef.where("name ILIKE ?", "%#{params[:query]}%")
+    elsif params[:specialty].present?
+      @chefs = Chef.where("specialties ILIKE ?", "%#{params[:specialty]}%")
+    else
+      @chefs = Chef.all
+    end
   end
 
   def show
