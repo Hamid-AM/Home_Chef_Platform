@@ -29,11 +29,11 @@
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <% if current_user.chef? %>
-                <%= link_to "Chef Profile", new_chef_path, class: "dropdown-item" %>
-                <%= link_to "Manage Menus", chef_menus_path(current_user.chef), class: "dropdown-item" %>
+                <%= link_to "Profile", edit_chef_path(current_user.chef), class: "dropdown-item" %>
               <% elsif current_user.client? %>
                 <span class="dropdown-item disabled"><%= current_user.name %></span>
               <% end %>
+              <%= link_to "Manage Menus", chef_menus_path(current_user.chef), class: "dropdown-item" %>
               <%= link_to "My Bookings", bookings_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
             </div>
