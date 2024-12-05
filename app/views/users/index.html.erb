@@ -1,15 +1,16 @@
-<h1>All Chefs</h1>
-
-<div class="row">
-  <% @users.each do |user| %>
-    <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title"><%= user.name %></h5>
-          <p><strong>Location:</strong> <%= user.location %></p>
-          <%= link_to 'View Profile', user_path(user), class: 'btn btn-primary' %>
+<div class="container mt-5">
+  <div class="row">
+    <% @chefs.each do |chef| %>
+      <div class="col-md-4 mb-4">
+        <div class="card" class="card rounded">
+          <%= image_tag "Chef_profile.jpg", class: "card-img-top"%>
+          <div class="card-body">
+            <h5 class="card-title"><%= chef.name %></h5>
+            <p class="card-text"><strong>Specialties:</strong> <%= chef.specialties %></p>
+            <a href="<%= user_path(chef) %>" class="btn btn-primary">Learn more</a>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
