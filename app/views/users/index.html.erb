@@ -1,10 +1,16 @@
-<!-- app/views/users/index.html.erb -->
-<h1>Chefs</h1>
-
-<ul>
-  <% @chefs.each do |chef| %>
-    <li>
-      <%= link_to chef.name, user_path(chef) %> - <%= chef.specialties %>
-    </li>
-  <% end %>
-</ul>
+<div class="container mt-5">
+  <div class="row">
+    <% @chefs.each do |chef| %>
+      <div class="col-md-4 mb-4">
+        <div class="card" class="card rounded">
+          <%= image_tag "Chef_profile.jpg", class: "card-img-top"%>
+          <div class="card-body">
+            <h5 class="card-title"><%= chef.name %></h5>
+            <p class="card-text"><strong>Specialties:</strong> <%= chef.specialties %></p>
+            <a href="<%= user_path(chef) %>" class="btn btn-primary">Learn more</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
