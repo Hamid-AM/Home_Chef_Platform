@@ -1,10 +1,15 @@
-<!-- app/views/users/index.html.erb -->
-<h1>Chefs</h1>
+<h1>All Chefs</h1>
 
-<ul>
-  <% @chefs.each do |chef| %>
-    <li>
-      <%= link_to chef.name, user_path(chef) %> - <%= chef.specialties %>
-    </li>
+<div class="row">
+  <% @users.each do |user| %>
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><%= user.name %></h5>
+          <p><strong>Location:</strong> <%= user.location %></p>
+          <%= link_to 'View Profile', user_path(user), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>

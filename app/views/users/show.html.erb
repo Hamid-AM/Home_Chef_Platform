@@ -1,38 +1,34 @@
 <h1><%= @user.name %>'s Profile</h1>
 
-<% if @user.role == 'chef' %>
+<% if @is_chef %>
   <p><strong>Specialties:</strong> <%= @user.specialties %></p>
   <p><strong>Biography:</strong> <%= @user.biography %></p>
   <p><strong>Location:</strong> <%= @user.location %></p>
 
   <h2>Your Menus</h2>
-  <% if @menus.any? %>
-    <ul>
-      <% @menus.each do |menu| %>
-        <li>
-          <%= menu.title %> - <%= menu.description %>
-          <%= link_to 'Edit', edit_user_menu_path(@user, menu) %> |
-          <%= link_to 'Delete', user_menu_path(@user, menu), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>You have not created any menus yet.</p>
+  <% if user_signed_in? && current_user == @user %>
+    <%= link_to 'Add New Menu', new_user_menu_path(@user), class: 'btn btn-success mb-3' %>
   <% end %>
-  <%= link_to 'Create a New Menu', new_user_menu_path(@user) %>
+  <ul>
+    <% @menus.each do |menu| %>
+      <li>
+        <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
+        <% if user_signed_in? && current_user == @user %>
+          <%= link_to 'Edit', edit_user_menu_path(@user, menu), class: 'btn btn-warning btn-sm' %>
+          <%= link_to 'Delete', user_menu_path(@user, menu), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 
-<% else %> <!-- For client view -->
-  <h2>Available Menus</h2>
-  <% if @menus.any? %>
-    <ul>
-      <% @menus.each do |menu| %>
-        <li>
-          <%= menu.title %> - <%= menu.description %>
-          <%= link_to 'Book This Menu', menu_bookings_path(menu), method: :post %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No menus are available at the moment.</p>
-  <% end %>
+<% elsif @is_client %>
+  <h2>Menus</h2>
+  <ul>
+    <% @menus.each do |menu| %>
+      <li>
+        <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
+        <%= link_to 'Book This Menu', new_user_menu_booking_path(@user, menu), class: 'btn btn-primary btn-sm' %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
