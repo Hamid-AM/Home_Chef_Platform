@@ -7,6 +7,14 @@ class UsersController < ApplicationController
     else
       @chefs = User.where(role: 'chef')
     end
+
+    # Geocoder
+    @markers = @chefs.geocoded.map do |chef|
+      {
+        lat: chef.latitude,
+        lng: chef.longitude
+      }
+    end
   end
 
   def show

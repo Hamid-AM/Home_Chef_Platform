@@ -10,7 +10,12 @@
 
 require 'faker'
 
+Review.destroy_all
+Booking.destroy_all
+Menu.destroy_all
 User.destroy_all
+
+
 
 5.times do
   User.create!(
@@ -70,4 +75,18 @@ Booking.all.each do |booking|
     rating: rand(1..5),
     comment: Faker::Lorem.paragraph(sentence_count: 2)
   )
+end
+
+# Ajout pour tester la map
+5.times do
+  User.create!(
+  email: Faker::Internet.unique.email,
+  password: 'password123',
+  name: Faker::Name.name,
+  role: 'chef',
+  specialties: nil,
+  biography: nil,
+  availability: nil,
+  location: "12 rue Lakanal, Grenoble"
+)
 end
