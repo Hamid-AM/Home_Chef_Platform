@@ -2,54 +2,49 @@
   <div class="text-center">
     <h1 class="display-4"><%= @user.name %>'s Profile</h1>
   </div>
+<% if @is_chef %>
+  <p><strong>Specialties:</strong> <%= @user.specialties %></p>
+  <p><strong>Biography:</strong> <%= @user.biography %></p>
+  <p><strong>Location:</strong> <%= @user.location %></p>
 
-  <% if @user.role == 'chef' %>
-    <div class="card my-4 shadow">
-      <div class="card-body">
-        <h2 class="card-title">Chef Profile</h2>
-        <p><strong>Specialties:</strong> <%= @user.specialties %></p>
-        <p><strong>Biography:</strong> <%= @user.biography %></p>
-        <p><strong>Location:</strong> <%= @user.location %></p>
-      </div>
-    </div>
-
-    <h2 class="mt-5">Your Menus</h2>
-    <% if @menus.any? %>
-      <div class="list-group">
-        <% @menus.each do |menu| %>
-          <div class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <h5><%= menu.title %></h5>
-              <p class="mb-1"><%= menu.description %></p>
-            </div>
-            <div>
-              <%= link_to 'Edit', edit_user_menu_path(@user, menu), class: "btn btn-info btn-sm me-2" %>
-              <%= link_to 'Delete', user_menu_path(@user, menu), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <p class="text-muted">You have not created any menus yet.</p>
-    <% end %>
-    <%= link_to 'Create a New Menu', new_user_menu_path(@user), class: "btn btn-success mt-3" %>
-  <% else %> <!-- For client view -->
-    <h2 class="mt-5">Available Menus</h2>
-    <% if @menus.any? %>
-      <div class="list-group">
-        <% @menus.each do |menu| %>
-          <div class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <h5><%= menu.title %></h5>
-              <p class="mb-1"><%= menu.description %></p>
-            </div>
-            <%= link_to 'Book This Menu', menu_bookings_path(menu), method: :post, class: "btn btn-success btn-sm" %>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <p class="text-muted">No menus are available at the moment.</p>
-    <% end %>
+  <h2>Your Menus</h2>
+  <% if user_signed_in? && current_user == @user %>
+    <%= link_to 'Add New Menu', new_user_menu_path(@user), class: 'btn btn-success mb-3' %>
   <% end %>
-</div>
+  <ul>
+    <% @menus.each do |menu| %>
+      <li>
+        <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
+        <% if user_signed_in? && current_user == @user %>
+          <%= link_to 'Edit', edit_user_menu_path(@user, menu), class: 'btn btn-warning btn-sm' %>
+          <%= link_to 'Delete', user_menu_path(@user, menu), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h2>Menus</h2>
+  <ul>
+    <% @menus.each do |menu| %>
+      <li>
+        <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
+        <% if current_user.client? %>
+          <%= simple_form_for [@user, menu, Booking.new], url: user_menu_bookings_path(@user, menu), method: :post do |f| %>
+            <div class="form-group">
+              <%= f.input :date, as: :date, label: 'Select Date', input_html: { class: 'form-control' } %>
+            </div>
+            <div class="form-group">
+              <%= f.input :time, as: :time, label: 'Select Time', input_html: { class: 'form-control' } %>
+            </div>
+            <div class="form-group">
+              <%= f.input :notes, as: :text, label: 'Additional Notes', input_html: { class: 'form-control', rows: 3 } %>
+            </div>
+            <%= f.submit 'Book This Menu', class: 'btn btn-primary' %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
+</div>
