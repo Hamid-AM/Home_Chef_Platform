@@ -1,5 +1,7 @@
-<h1><%= @user.name %>'s Profile</h1>
-
+<div class="container mt-5">
+  <div class="text-center">
+    <h1 class="display-4"><%= @user.name %>'s Profile</h1>
+  </div>
 <% if @is_chef %>
   <p><strong>Specialties:</strong> <%= @user.specialties %></p>
   <p><strong>Biography:</strong> <%= @user.biography %></p>
@@ -44,3 +46,5 @@
     <% end %>
   </ul>
 <% end %>
+
+</div>

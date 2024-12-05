@@ -1,2 +1,20 @@
-<h1>Create a New Menu</h1>
-<%= render 'form' %>
+<div class="container d-flex justify-content-center align-items-center min-vh-100" style="margin-top: -50px; custom-form-spacing">
+  <div class="card shadow-lg p-4 w-50 rounded">
+    <h1 class="text-center mb-4 text-black">My Menu</h1>
+    <%= simple_form_for @menu do |f| %>
+      <div class="form-group">
+        <%= f.input :title, input_html: { class: 'form-control' }, label: 'Menu Title' %>
+      </div>
+      <div class="form-group">
+        <%= f.input :description, input_html: { class: 'form-control' }, as: :text, label: 'Description' %>
+      </div>
+      <div class="form-group">
+        <%= f.input :price, input_html: { class: 'form-control' }, as: :numeric, label: 'Price' %>
+      </div>
+      <div class="form-group text-center">
+        <%= f.submit 'Create Menu', class: 'btn btn-success me-2' %>
+        <%= link_to 'Back to All Menus', menus_path, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
