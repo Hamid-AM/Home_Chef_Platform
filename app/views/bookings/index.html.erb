@@ -1,13 +1,14 @@
-<h1>Your Bookings</h1>
+<h1>Manage Bookings</h1>
+
 <% if current_user.client? %>
-  <h2>Bookings You've Made</h2>
+  <h2>Bookings You’ve Made</h2>
   <ul>
     <% @bookings.each do |booking| %>
       <li>
-        <strong>Menu:</strong> <%= link_to booking.menu.title, menu_path(booking.menu) %> <br>
-        <strong>Status:</strong> <%= booking.status %> <br>
-        <strong>Date:</strong> <%= booking.date %> at <%= booking.time.strftime('%H:%M') if booking.time %> <br>
-        <strong>Total Price:</strong> <%= number_to_currency(booking.total_price) %> <br>
+        <strong>Menu:</strong> <%= link_to booking.menu.title, user_path(booking.menu.user) %><br>
+        <strong>Status:</strong> <%= booking.status %><br>
+        <strong>Date:</strong> <%= booking.date %><br>
+        <strong>Total Price:</strong> <%= number_to_currency(booking.total_price) %><br>
         <strong>Notes:</strong> <%= booking.notes %>
       </li>
     <% end %>
@@ -17,13 +18,12 @@
   <ul>
     <% @bookings.each do |booking| %>
       <li>
-        <strong>Menu:</strong> <%= link_to booking.menu.title, menu_path(booking.menu) %> <br>
-        <strong>Client:</strong> <%= booking.user.name %> <br>
-        <strong>Date:</strong> <%= booking.date %> at <%= booking.time.strftime('%H:%M') if booking.time %> <br>
-        <strong>Status:</strong> <%= booking.status %> <br>
-        <strong>Notes:</strong> <%= booking.notes %>
-        <%= link_to 'Accept', booking_path(booking, status: 'accepted'), method: :patch, class: 'btn btn-success' %>
-        <%= link_to 'Reject', booking_path(booking, status: 'rejected'), method: :patch, class: 'btn btn-danger' %>
+        <strong>Menu:</strong> <%= link_to booking.menu.title, user_path(current_user) %><br>
+        <strong>Client:</strong> <%= booking.user.name %><br>
+        <strong>Status:</strong> <%= booking.status %><br>
+        <strong>Date:</strong> <%= booking.date %><br>
+        <%= link_to 'Accept', user_booking_path(current_user, booking, status: 'accepted'), method: :patch, class: 'btn btn-success btn-sm' %>
+        <%= link_to 'Reject', user_booking_path(current_user, booking, status: 'rejected'), method: :patch, class: 'btn btn-danger btn-sm' %>
       </li>
     <% end %>
   </ul>

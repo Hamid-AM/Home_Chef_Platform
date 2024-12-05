@@ -1,9 +1,7 @@
-<!-- app/views/menus/new.html.erb -->
-
 <div class="container d-flex justify-content-center align-items-center min-vh-100" style="margin-top: -50px; custom-form-spacing">
   <div class="card shadow-lg p-4 w-50 rounded">
     <h1 class="text-center mb-4 text-black">My Menu</h1>
-    <%= simple_form_for @menu do |f| %>
+    <%= simple_form_for [@user, @menu] do |f| %>
       <div class="form-group">
         <%= f.input :title, input_html: { class: 'form-control' }, label: 'Menu Title' %>
       </div>
@@ -15,7 +13,7 @@
       </div>
       <div class="form-group text-center">
         <%= f.submit 'Create Menu', class: 'btn btn-success me-2' %>
-        <%= link_to 'Back to All Menus', menus_path, class: 'btn btn-primary' %>
+        <%= link_to 'Back to All Menus', new_user_menu_path, class: 'btn btn-primary' %>
       </div>
     <% end %>
   </div>

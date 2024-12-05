@@ -17,10 +17,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if @user.role == 'chef'
-      @menus = @user.menus
-    else
-      @menus = Menu.all
-    end
+    @menus = @user.menus
+    @is_chef = @user.chef?
+    @is_client = user_signed_in? && current_user.client?
   end
 end
