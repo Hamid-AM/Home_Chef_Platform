@@ -1,11 +1,15 @@
-<h1>Welcome to the Home Chef Platform!</h1>
-
-<h2>Our Chefs:</h2>
-<ul>
+<%= render "shared/banner" %>
+<div class="chefs-grid">
   <% @chefs.each do |chef| %>
-    <li>
-      <strong><%= chef.name %></strong><br>
-      <%= chef.specialties %>
-    </li>
+    <div class="chef-card" data-controller="chef-card" data-chef-card-url-value="<%= user_path(chef) %>">
+      <div class="chef-image">
+        <%= image_tag "Chef_Stef.jpeg", alt: "#{chef.name}'s photo" %>
+      </div>
+      <div class="chef-info">
+        <h3><%= chef.name %></h3>
+        <p><%= chef.specialties %></p>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
+
