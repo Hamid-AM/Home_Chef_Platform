@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
     @booking.total_price = @menu.price # Default price is based on the menu price
 
     if @booking.save
-      redirect_to user_bookings_path, notice: 'Booking successfully created.'
+      redirect_to user_bookings_path
     else
       redirect_to user_path(@menu.user)
     end
@@ -29,7 +29,7 @@ class BookingsController < ApplicationController
   def update
     if current_user.chef? && @booking.menu.user == current_user
       @booking.update(status: params[:status])
-      redirect_to bookings_path, notice: 'Booking status updated.'
+      redirect_to user_bookings_path
     else
       redirect_to root_path
     end

@@ -1,8 +1,0 @@
-<h1>Booking Details</h1>
-
-<p><strong>Menu:</strong> <%= @booking.menu.title %></p>
-<p><strong>Date:</strong> <%= @booking.date.strftime('%B %d, %Y at %I:%M %p') %></p>
-<p><strong>Status:</strong> <%= @booking.status.capitalize %></p>
-<p><strong>Notes:</strong> <%= @booking.notes %></p>
-
-<%= link_to 'Back to My Bookings', my_bookings_path, class: 'btn btn-secondary' %>
