@@ -12,6 +12,11 @@ class BookingsController < ApplicationController
     end
   end
 
+  def new
+    @menu = Menu.find(params[:menu_id]) # Trouver le menu en fonction de l'ID
+    @booking = @menu.bookings.build(user: current_user) # Associer le menu et l'utilisateur
+  end
+
   def create
     @menu = Menu.find(params[:menu_id])
     @booking = Booking.new(booking_params)
