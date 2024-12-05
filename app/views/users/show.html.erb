@@ -3,10 +3,6 @@
     <h1 class="display-4"><%= @user.name %>'s Profile</h1>
   </div>
 
-  <p>Current user: <%= current_user.name if user_signed_in? %></p>
-<p>Is client? <%= @is_client %></p>
-<p>Is chef? <%= @is_chef %></p>
-
 <% if @is_client %>
 <h2>Menus</h2>
   <ul>
