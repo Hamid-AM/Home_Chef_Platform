@@ -1,6 +1,6 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<%= asset_path('chef_banner.jpg') %>');">
   <div class="container">
     <h1><strong>Talented chefs & delicious meals</strong>, right at your home with just a <strong>click!</strong></h1>
-    <a class="btn btn-success" href="#">Discover</a>
+    <%= link_to "Create account", new_user_registration_path, class: "btn btn-success" %>
   </div>
 </div>

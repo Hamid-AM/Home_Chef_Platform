@@ -1,13 +1,14 @@
 <%= simple_form_for [@user, @menu] do |f| %>
-  <div class="form-group">
-    <%= f.input :title, input_html: { class: 'form-control' } %>
+  <div class="mb-3">
+    <%= f.input :title, label: "Menu Title", input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
   </div>
-  <div class="form-group">
-    <%= f.input :description, input_html: { class: 'form-control' }, as: :text %>
+  <div class="mb-3">
+    <%= f.input :description, label: "Description", input_html: { class: 'form-control' }, label_html: { class: 'form-label' }, as: :text %>
   </div>
-  <div class="form-group">
-    <%= f.input :price, input_html: { class: 'form-control' }, as: :numeric %>
+  <div class="mb-3">
+    <%= f.input :price, label: "Price ($)", input_html: { class: 'form-control' }, label_html: { class: 'form-label' }, as: :numeric %>
   </div>
-  <%= f.submit class: 'btn btn-primary' %>
+  <div class="d-flex justify-content-between">
+    <%= f.submit "Save Changes", class: 'btn btn-primary' %>
+  </div>
 <% end %>
-<%= link_to 'Back to Profile', user_path(@user), class: 'btn btn-secondary mt-3' %>
