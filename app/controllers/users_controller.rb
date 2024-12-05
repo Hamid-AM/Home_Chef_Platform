@@ -2,9 +2,16 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.where(role: 'chef')
+    @chefs = User.where(role: 'chef')
+
+    # Filtrage par nom si la query est présente
     if params[:query].present?
-      @chefs = @chefs.where('name ILIKE ? OR location ILIKE ?', "%#{params[:query]}%", "%#{params[:query]}%")
+      @chefs = @chefs.where('name ILIKE ?', "%#{params[:query]}%")
+    end
+
+    # Filtrage par spécialité si elle est sélectionnée
+    if params[:specialty].present?
+      @chefs = @chefs.where(specialties: params[:specialty])
     end
   end
 
