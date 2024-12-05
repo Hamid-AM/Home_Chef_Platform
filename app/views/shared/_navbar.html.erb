@@ -4,19 +4,18 @@
       <%= image_tag "logo-home_chef.jpg" %>
     <% end %>
 
-      <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%; border-radius: 8px;" method="get" action="<%= users_path %>">
-        <input class="form-control me-2" type="search" name="query" value="<%= params[:query] %>" placeholder="Search" aria-label="Search" style="border-radius: 8px;">
+    <form class="d-flex mx-auto" role="search" style="max-width: 500px; width: 100%; border-radius: 8px;" method="get" action="<%= users_path %>">
+      <input class="form-control me-2" type="search" name="query" value="<%= params[:query] %>" placeholder="Search" aria-label="Search" style="border-radius: 8px;">
 
-        <select class="form-control me-2" name="specialty" style="border-radius: 8px;">
-          <option value="">--Select Specialties--</option>
-          <% @specialties.each do |specialty| %>
-            <option value="<%= specialty %>" <%= 'selected' if params[:specialty] == specialty %>><%= specialty %></option>
-          <% end %>
-        </select>
+      <select class="form-control me-2" name="specialty" style="border-radius: 8px;">
+        <option value="">--Select Specialties--</option>
+        <% @specialties.each do |specialty| %>
+          <option value="<%= specialty %>" <%= 'selected' if params[:specialty] == specialty %>><%= specialty %></option>
+        <% end %>
+      </select>
 
-        <button class="btn btn-outline-success" type="submit" style="border-radius: 8px;">Search</button>
-      </form>
-
+      <button class="btn btn-outline-success" type="submit" style="border-radius: 8px;">Search</button>
+    </form>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -34,11 +33,15 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <!-- Profile action -->
               <% if current_user.chef? %>
                 <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
+                <%= link_to "Bookings", user_bookings_path(current_user.id), class: "dropdown-item" %> <!-- Pas besoin de @menu.id ici -->
               <% elsif current_user.client? %>
                 <span class="dropdown-item disabled"><%= current_user.name %></span>
+                <%= link_to "My Bookings", user_bookings_path(current_user.id), class: "dropdown-item" %> <!-- Pas besoin de menu_id ici non plus -->
               <% end %>
+
               <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
             </div>
           </li>
