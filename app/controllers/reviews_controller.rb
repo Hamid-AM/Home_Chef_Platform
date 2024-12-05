@@ -1,4 +1,3 @@
-# app/controllers/reviews_controller.rb
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_menu, only: [:create]
