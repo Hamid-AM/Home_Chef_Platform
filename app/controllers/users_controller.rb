@@ -12,6 +12,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @menus = @user.menus
     @is_chef = @user.chef?
-    @is_client = current_user.client? if user_signed_in?
+    @is_client = user_signed_in? && current_user.client?
   end
 end

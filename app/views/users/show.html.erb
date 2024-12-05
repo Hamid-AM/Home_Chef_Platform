@@ -20,14 +20,26 @@
       </li>
     <% end %>
   </ul>
-
-<% elsif @is_client %>
+<% else %>
   <h2>Menus</h2>
   <ul>
     <% @menus.each do |menu| %>
       <li>
         <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
-        <%= link_to 'Book This Menu', new_user_menu_booking_path(@user, menu), class: 'btn btn-primary btn-sm' %>
+        <% if current_user.client? %>
+          <%= simple_form_for [@user, menu, Booking.new], url: user_menu_bookings_path(@user, menu), method: :post do |f| %>
+            <div class="form-group">
+              <%= f.input :date, as: :date, label: 'Select Date', input_html: { class: 'form-control' } %>
+            </div>
+            <div class="form-group">
+              <%= f.input :time, as: :time, label: 'Select Time', input_html: { class: 'form-control' } %>
+            </div>
+            <div class="form-group">
+              <%= f.input :notes, as: :text, label: 'Additional Notes', input_html: { class: 'form-control', rows: 3 } %>
+            </div>
+            <%= f.submit 'Book This Menu', class: 'btn btn-primary' %>
+          <% end %>
+        <% end %>
       </li>
     <% end %>
   </ul>

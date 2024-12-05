@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show] do
 
-    resources :menus, only: [:new, :create, :edit, :update, :destroy] do
+    resources :menus, only: [:show, :new, :create, :edit, :update, :destroy] do
       resources :bookings, only: [:new, :create]
       resources :reviews, only: [:create]
     end
