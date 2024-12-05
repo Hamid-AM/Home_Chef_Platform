@@ -3,14 +3,14 @@ class ReviewsController < ApplicationController
   before_action :set_menu, only: [:create]
 
   def create
-    @review = @menu.reviews.new(review_params)
+    @review = Review.new(review_params)
     @review.user = current_user
-    if Booking.exists?(menu: @menu, user: current_user)
-      if @review.save
-        redirect_to user_path(@menu.user)
-      end
-    else
+    @review.menu = @menu
+    @review.booking = Booking.find_by(menu: @menu, user: current_user)
+    if @review.booking && @review.save
       redirect_to user_path(@menu.user)
+    else
+      render user_path(@menu.user), status: :unprocessable_entity
     end
   end
 

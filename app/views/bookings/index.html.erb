@@ -22,8 +22,8 @@
         <strong>Client:</strong> <%= booking.user.name %><br>
         <strong>Status:</strong> <%= booking.status %><br>
         <strong>Date:</strong> <%= booking.date %><br>
-        <%= link_to 'Accept', user_booking_path(current_user, booking, status: 'accepted'), method: :patch, class: 'btn btn-success btn-sm' %>
-        <%= link_to 'Reject', user_booking_path(current_user, booking, status: 'rejected'), method: :patch, class: 'btn btn-danger btn-sm' %>
+        <%= link_to 'Accept', user_booking_path(current_user, booking, status: 'accepted'), data: {turbo_method: :patch}, class: 'btn btn-success btn-sm' %>
+        <%= link_to 'Reject', user_booking_path(current_user, booking, status: 'rejected'), data: {turbo_method: :patch}, class: 'btn btn-danger btn-sm' %>
 
       </li>
     <% end %>
