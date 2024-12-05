@@ -1,3 +1,25 @@
 <!-- app/views/menus/edit.html.erb -->
-<h1>Edit Menu</h1>
-<%= render 'form' %>
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h1 class="display-4">Edit Menu</h1>
+  </div>
+
+  <div class="card shadow p-4">
+    <%= simple_form_for @menu do |f| %>
+      <div class="mb-3">
+        <%= f.input :title, label: "Menu Title", input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+      </div>
+      <div class="mb-3">
+        <%= f.input :description, label: "Description", input_html: { class: 'form-control' }, label_html: { class: 'form-label' }, as: :text %>
+      </div>
+      <div class="mb-3">
+        <%= f.input :price, label: "Price ($)", input_html: { class: 'form-control' }, label_html: { class: 'form-label' }, as: :numeric %>
+      </div>
+      <div class="d-flex justify-content-between">
+        <%= f.submit "Save Changes", class: 'btn btn-primary' %>
+        <%= link_to 'Back to All Menus', menus_path, class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
