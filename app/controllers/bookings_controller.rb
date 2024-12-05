@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
     @booking.total_price = @menu.price # Default price is based on the menu price
 
     if @booking.save
-      redirect_to bookings_path, notice: 'Booking successfully created.'
+      redirect_to user_bookings_path, notice: 'Booking successfully created.'
     else
       redirect_to user_path(@menu.user)
     end

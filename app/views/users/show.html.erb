@@ -2,7 +2,58 @@
   <div class="text-center">
     <h1 class="display-4"><%= @user.name %>'s Profile</h1>
   </div>
-<% if @is_chef %>
+
+  <p>Current user: <%= current_user.name if user_signed_in? %></p>
+<p>Is client? <%= @is_client %></p>
+<p>Is chef? <%= @is_chef %></p>
+
+<% if @is_client %>
+<h2>Menus</h2>
+  <ul>
+    <% @menus.each do |menu| %>
+      <li>
+        <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
+
+        <h4>Reviews</h4>
+        <% menu.reviews.each do |review| %>
+        <p>
+          <strong><%= review.user.name %>:</strong> <%= review.rating %>/5
+          <br>
+          <%= review.comment %>
+        </p>
+        <% end %>
+        <% if current_user.client? && Booking.exists?(menu: menu, user: current_user) %>
+        <h4>Add a Review</h4>
+        <%= simple_form_for [menu, Review.new], url: user_menu_reviews_path(@user, menu), method: :post do |f| %>
+          <div class="form-group">
+            <%= f.input :rating, as: :select, collection: 1..5, label: 'Rating (1-5)', input_html: { class: 'form-control' } %>
+          </div>
+          <div class="form-group">
+            <%= f.input :comment, as: :text, label: 'Comment', input_html: { class: 'form-control', rows: 3 } %>
+          </div>
+          <%= f.submit 'Submit Review', class: 'btn btn-primary mt-2' %>
+        <% end %>
+      <% end %>
+
+        <% if current_user.client? %>
+          <%= simple_form_for [@user, menu, Booking.new], url: user_menu_bookings_path(@user, menu), method: :post do |f| %>
+            <div class="form-group">
+              <%= f.input :date, as: :date, label: 'Select Date', input_html: { class: 'form-control' } %>
+            </div>
+            <div class="form-group">
+              <%= f.input :time, as: :time, label: 'Select Time', input_html: { class: 'form-control' } %>
+            </div>
+            <div class="form-group">
+              <%= f.input :notes, as: :text, label: 'Additional Notes', input_html: { class: 'form-control', rows: 3 } %>
+            </div>
+            <%= f.submit 'Book This Menu', class: 'btn btn-primary' %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+
   <p><strong>Specialties:</strong> <%= @user.specialties %></p>
   <p><strong>Biography:</strong> <%= @user.biography %></p>
   <p><strong>Location:</strong> <%= @user.location %></p>
@@ -18,29 +69,6 @@
         <% if user_signed_in? && current_user == @user %>
           <%= link_to 'Edit', edit_user_menu_path(@user, menu), class: 'btn btn-warning btn-sm' %>
           <%= link_to 'Delete', user_menu_path(@user), method: :delete, data: {turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <h2>Menus</h2>
-  <ul>
-    <% @menus.each do |menu| %>
-      <li>
-        <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
-        <% if current_user.client? %>
-          <%= simple_form_for [@user, menu, Booking.new], url: user_menu_bookings_path(@user, menu), method: :post do |f| %>
-            <div class="form-group">
-              <%= f.input :date, as: :date, label: 'Select Date', input_html: { class: 'form-control' } %>
-            </div>
-            <div class="form-group">
-              <%= f.input :time, as: :time, label: 'Select Time', input_html: { class: 'form-control' } %>
-            </div>
-            <div class="form-group">
-              <%= f.input :notes, as: :text, label: 'Additional Notes', input_html: { class: 'form-control', rows: 3 } %>
-            </div>
-            <%= f.submit 'Book This Menu', class: 'btn btn-primary' %>
-          <% end %>
         <% end %>
       </li>
     <% end %>
