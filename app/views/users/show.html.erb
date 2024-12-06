@@ -1,74 +1,115 @@
 <div class="container mt-5">
   <div class="text-center">
-    <h1 class="display-4"><%= @user.name %>'s Profile</h1>
+    <h1 class="display-4"><%= @user.name %></h1>
+  </div>
+  <%# Bloc avatar + bio %>
+<div id="avatar-bio">
+  <div style="margin-right: 20px;">
+    <img src="https://chefsquare.fr/media/chefs/portrait_Mickael.jpg"
+         style="border-radius: 50%; width: 200px; position: relative; margin-right: 30px;">
   </div>
 
+  <div>
+    <h2>About me</h2>
+    <p><strong>My specialties:</strong> <%= @user.specialties %></p>
+    <p><strong>Bio:</strong> <%= @user.biography %></p>
+    <p><i class="fa-solid fa-location-dot"></i> <%= @user.location %></p>
+  </div>
+</div>
+<br>
+<%# LE VISITEUR EST UN CLIENT %>
 <% if @is_client %>
-<h2>Menus</h2>
-  <ul>
-    <% @menus.each do |menu| %>
-      <li>
-        <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
-
-        <h4>Reviews</h4>
+  <h2>Menus</h2>
+  <% @menus.each do |menu| %>
+    <div class="menu-container">
+      <!-- Left Section -->
+      <div class="menu-left">
+        <div class="card-product">
+          <img src="https://cdn.chefclub.tools/uploads/recipes/cover-thumbnail/a3083e00-1dcf-467b-b037-31310bade186_zo5PcTC.jpg" />
+          <div class="card-product-infos">
+            <h2><%= menu.title %></h2>
+            <p><%= menu.description %></p>
+            <p><%= number_to_currency(menu.price) %></p>
+          </div>
+        </div>
+        <%# Reviews %>
         <% menu.reviews.each do |review| %>
-        <p>
-          <strong><%= review.user.name %>:</strong> <%= review.rating %>/5
-          <br>
-          <%= review.comment %>
-        </p>
+          <p>
+            <strong><%= review.user.name %></strong><br>
+            <% (1..5).each do |i| %>
+              <% if i <= review.rating %>
+                <i class="fa-solid fa-star"></i>
+              <% else %>
+                <i class="fa-regular fa-star"></i>
+              <% end %>
+            <% end %>
+            <%= review.comment %>
+          </p>
         <% end %>
         <% if current_user.client? && Booking.exists?(menu: menu, user: current_user) %>
-        <h4>Add a Review</h4>
-        <%= simple_form_for [menu, Review.new], url: user_menu_reviews_path(@user, menu), method: :post do |f| %>
-          <div class="form-group">
-            <%= f.input :rating, as: :select, collection: 1..5, label: 'Rating (1-5)', input_html: { class: 'form-control' } %>
+          <h3>Add a Review</h3>
+          <div id="form-review">
+            <%= simple_form_for [menu, Review.new], url: user_menu_reviews_path(@user, menu), method: :post do |f| %>
+              <div class="form-group" id="form-review-rating">
+                <%= f.input :rating, as: :select, collection: 1..5, label: 'Rating (1-5)', input_html: { class: 'form-control' } %>
+              </div>
+              <div class="form-group">
+                <%= f.input :comment, as: :text, label: 'Comment', input_html: { class: 'form-control', rows: 3 } %>
+              </div>
+              <%= f.submit 'Submit Review', class: 'btn btn-outline-warning mt-2' %>
+            <% end %>
           </div>
-          <div class="form-group">
-            <%= f.input :comment, as: :text, label: 'Comment', input_html: { class: 'form-control', rows: 3 } %>
-          </div>
-          <%= f.submit 'Submit Review', class: 'btn btn-primary mt-2' %>
         <% end %>
-      <% end %>
+      </div>
 
-        <% if current_user.client? %>
-          <%= simple_form_for [@user, menu, Booking.new], url: user_menu_bookings_path(@user, menu), method: :post do |f| %>
-            <div class="form-group">
-              <%= f.input :date, as: :date, label: 'Select Date', input_html: { class: 'form-control' } %>
-            </div>
-            <div class="form-group">
-              <%= f.input :time, as: :time, label: 'Select Time', input_html: { class: 'form-control' } %>
-            </div>
-            <div class="form-group">
-              <%= f.input :notes, as: :text, label: 'Additional Notes', input_html: { class: 'form-control', rows: 3 } %>
-            </div>
-            <%= f.submit 'Book This Menu', class: 'btn btn-primary' %>
+      <!-- Right Section -->
+      <div class="menu-right">
+        <div class="bloc-booking-menu">
+          <h3>Try it now!</h3>
+          <% if current_user.client? %>
+            <%= simple_form_for [@user, menu, Booking.new], url: user_menu_bookings_path(@user, menu), method: :post do |f| %>
+              <div class="form-group">
+                <%= f.input :date, as: :date, label: 'Select Date', input_html: { class: 'form-control' } %>
+              </div>
+              <div class="form-group">
+                <%= f.input :time, as: :time, label: 'Select Time', input_html: { class: 'form-control' } %>
+              </div>
+              <div class="form-group">
+                <%= f.input :notes, as: :text, label: 'Additional Notes', input_html: { class: 'form-control', rows: 3 }, placeholder: "How many people? Any allergies?" %>
+              </div>
+              <%= f.submit 'Book This Menu', class: 'btn btn-warning', style: 'display: block; margin: 0 auto;' %>
+            <% end %>
           <% end %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+<% end %>
 <% else %>
 
-  <p><strong>Specialties:</strong> <%= @user.specialties %></p>
-  <p><strong>Biography:</strong> <%= @user.biography %></p>
-  <p><strong>Location:</strong> <%= @user.location %></p>
+<%# LE VISITEUR EST UN CHEF %>
 
-  <h2>Your Menus</h2>
-  <% if user_signed_in? && current_user == @user %>
-    <%= link_to 'Add New Menu', new_user_menu_path(@user), class: 'btn btn-success mb-3' %>
-  <% end %>
-  <ul>
-    <% @menus.each do |menu| %>
-      <li>
-        <strong><%= menu.title %></strong>: <%= menu.description %> - <%= number_to_currency(menu.price) %>
-        <% if user_signed_in? && current_user == @user %>
-          <%= link_to 'Edit', edit_user_menu_path(@user, menu), class: 'btn btn-warning btn-sm' %>
-          <%= link_to 'Delete', user_menu_path(@user, menu), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-        <% end %>
-      </li>
+  <h2>My Menus</h2>
+
+  <% @menus.each do |menu| %>
+  <div class="card-product">
+    <img src="https://cdn.chefclub.tools/uploads/recipes/cover-thumbnail/a3083e00-1dcf-467b-b037-31310bade186_zo5PcTC.jpg" />
+    <div class="card-product-infos">
+      <h2><%= menu.title %></h2>
+      <p><%= menu.description %></p>
+      <p><%= number_to_currency(menu.price) %></p>
+      <% if user_signed_in? && current_user == @user %>
+        <%= link_to "<i class='fa-solid fa-pen-to-square icone-modif-green'></i>".html_safe, edit_user_menu_path(@user, menu) %>
+        <%= link_to "<i class='fa-solid fa-trash icone-modif-red'></i>".html_safe, user_menu_path(@user, menu), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </ul>
-<% end %>
 
+  <% if user_signed_in? && current_user == @user %>
+    <%= link_to 'Add New Menu', new_user_menu_path(@user), class: 'btn btn-outline-success mb-3' %>
+  <% end %>
+
+  <% end %>
 </div>

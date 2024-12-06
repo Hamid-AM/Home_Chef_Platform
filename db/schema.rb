@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_05_084649) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_05_090631) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_05_084649) do
     t.text "biography"
     t.string "availability"
     t.string "location"
+    t.float "latitude"
+    t.float "longitude"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
