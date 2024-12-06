@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       @chefs = User.where(role: 'chef')
     end
 
-    # Geocoder
+    # Geocoder / mapbox
     @markers = @chefs.geocoded.map do |chef|
       {
         lat: chef.latitude,

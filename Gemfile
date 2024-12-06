@@ -80,4 +80,5 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# Pour mapbox
 gem "geocoder"

@@ -1,25 +1,23 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const navbar = document.getElementById("navbar-top");
-    const hiddenContent = document.getElementById("container-map");
+    const map = document.getElementById("container-map");
 
-    // Montre le contenu au survol de la navbar
     navbar.addEventListener("mouseenter", () => {
-        hiddenContent.style.display = "block";
+        map.style.display = "block";
     });
 
-    // Masque le contenu uniquement si la souris quitte à la fois la navbar ET le contenu
-    const hideContent = (event) => {
+    const hideMap = () => {
         const isOverNavbar = navbar.matches(":hover");
-        const isOverContent = hiddenContent.matches(":hover");
+        const isOverMap = map.matches(":hover");
 
-        if (!isOverNavbar && !isOverContent) {
-            hiddenContent.style.display = "none";
+        if (!isOverNavbar && !isOverMap) {
+            map.style.display = "none";
         }
     };
 
-    navbar.addEventListener("mouseleave", hideContent);
-    // hiddenContent.addEventListener("mouseleave", hideContent);
+    navbar.addEventListener("mouseleave", hideMap);
+    map.addEventListener("mouseleave", hideMap);
 });
 </script>
 
@@ -77,6 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
   <div
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>" id="map-display">
   </div>
 </div>

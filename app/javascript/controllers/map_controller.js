@@ -18,15 +18,28 @@ export default class extends Controller {
     })
 
     this.#addMarkersToMap()
+
+    // NOTE : le changement de display none > block du contenur n'est pas reconnu par Stimulus après le chargement de la page
+    // Ajout d'un observer pour surveiller la visibilité du contenur
+    const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      this.map.resize();
+    }
+  });
+
+  observer.observe(this.element);
   }
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({
+        color: marker.color || "#FE8F00"
+    })
         .setLngLat([ marker.lng, marker.lat ])
         .setPopup(popup)
         .addTo(this.map)
     })
   }
+
 }

@@ -22,18 +22,17 @@
 #container-map {
   background-color: white;
   width: 100%;
-  height: 500px;
-  // position: absolute;
+  height: 520px;
+  position: absolute;
   z-index: 2;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  left: 35%;
   padding: 5px;
   display: none;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .mapboxgl-map {
-  border-radius: 6px;
+  width: 100%;
   height: 100%;
+  border-radius: 6px;
 }

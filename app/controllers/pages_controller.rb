@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     @chefs = User.where(role: 'chef')
-        # Geocoder
+        # Geocoder / map
         @markers = @chefs.geocoded.map do |chef|
           {
             lat: chef.latitude,
