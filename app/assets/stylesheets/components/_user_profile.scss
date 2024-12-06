@@ -1,0 +1,119 @@
+// Bloc About me
+#avatar-bio {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 8px;
+  border-radius: 6px;
+}
+// Structure des div du bloc menu + reviews + booking
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.menu-left {
+  flex: 7;
+  max-width: 70%;
+}
+
+.menu-right {
+  flex: 3;
+  max-width: 30%;
+}
+
+// Menus
+.card-product {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-product img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.card-product h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+}
+
+// Reviews
+.fa-solid {
+  color: gold;
+}
+.fa-regular {
+  color: lightgray;
+}
+.fa-location-dot {
+  color: black;
+}
+#form-review {
+  width: 40%;
+}
+#form-review-rating {
+  width: 20%;
+}
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #34495E;
+  width: 80%;
+  margin: 50px auto;
+  border-radius: 5px;
+}
+
+// Booking
+.bloc-booking-menu {
+  width: 100%;
+  background-color: white;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+h3 {
+  color: #34495E;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+// VISITEUR EST UN CHEF
+.icone-modif-green {
+  color: #28a745;
+}
+.icone-modif-green:hover {
+  color: #59cb74;
+}
+.icone-modif-red {
+  color: red;
+}
+.icone-modif-red:hover {
+  color: rgb(228, 88, 88);
+}
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fe8f00;
+  size: 24px;
+}
