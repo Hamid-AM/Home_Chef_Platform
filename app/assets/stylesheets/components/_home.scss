@@ -13,12 +13,15 @@
 }
 
 .larger-card {
-  width: 100%; 
+  width: 100%;
   min-height: 200px;
 }
 
-
-
+.img-proportional {
+  width: 200px;
+  height: 200px;
+  object-fit: cover; /* Ajuste l'image pour remplir l'espace sans distorsion */
+}
 
 .btn-discover {
   width: auto;
@@ -32,4 +35,27 @@
 
 .card .btn-discover {
   margin: 0 auto;
+}
+
+.transparent-card {
+  background-color: rgba(240, 240, 240, 0.9) !important; /* Fond semi-transparent avec opacité de 0.8 */
+  border: 1px solid rgba(180, 180, 180, 0.5); /* Bordure blanche avec opacité de 0.3 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.transparent-card2 {
+  background-color: transparent !important; /* Fond semi-transparent avec opacité de 0.8 */
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.d-none {
+  display: none !important;
+}
+
+.bg-image-container {
+  background-image: url('https://png.pngtree.com/background/20230519/original/pngtree-chef-is-slicing-up-food-on-a-wooden-board-picture-image_2662770.jpg'); /* Remplacez 'path_to_your_image.jpg' par le chemin réel de votre image */
+  background-size: cover;  /* Cela permet de couvrir toute la surface */
+  background-position: center; /* Cela centre l'image d'arrière-plan */
+  padding: 120px 0; /* Ajuste l'espace en haut et en bas */
+  color: white; /* Ajuste la couleur du texte si nécessaire */
 }

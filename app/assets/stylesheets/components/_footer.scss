@@ -1,27 +1,54 @@
 .footer {
-  position: relative;
-  background: #F4F4F4;
+  background: white; /* Couleur de fond du footer */
+  color: #000000; /* Couleur du texte */
+  padding: 10px 20px; /* Espacement interne du footer */
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100px;
-  padding: 0px 50px;
-  color: rgba(0,0,0,0.3);
+  justify-content: space-between; /* Sépare les deux sections */
+  align-items: center; /* Centre verticalement les éléments */
+  position: fixed; /* Fixe le footer en bas */
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Hauteur du footer */
 }
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Espace entre les icônes et le logo avec texte */
+  width: 100%; /* Prend toute la largeur */
+}
+
 .footer-links {
   display: flex;
-  align-items: center;
+  gap: 15px; /* Espacement entre les icônes */
 }
+
 .footer-links a {
-  color: black;
-  opacity: 0.15;
-  text-decoration: none;
-  font-size: 24px;
-  padding: 0px 10px;
+  color: #000000; /* Couleur des icônes */
+  font-size: 1.5rem; /* Taille des icônes */
+  text-decoration: none; /* Enlève la décoration du texte */
+  transition: color 0.3s ease; /* Animation de changement de couleur au survol */
 }
+
 .footer-links a:hover {
-  opacity: 1;
+  color: #FE8F00; /* Couleur des icônes au survol */
 }
-.footer .fa-heart {
-  color: #D23333;
+
+.footer-copyright {
+  display: flex;
+  align-items: center; /* Aligne le logo et le texte verticalement */
+  gap: 10px; /* Espacement entre le logo et le texte */
 }
+
+.footer-logo {
+  height: 30px; /* Taille réduite du logo */
+  width: auto; /* Garde les proportions du logo */
+}
+
+.footer span {
+  font-size: 1rem; /* Taille de texte du copyright */
+}
+
+.footer i.fas.fa-heart {
+  color: #d9534f; /* Rouge pour le cœur */
+}
+
