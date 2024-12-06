@@ -1,40 +1,48 @@
 <%= render "shared/banner" %>
 
-<div class="container mt-5">
+<div class="container mt-3 bg-image-container"> <!-- Réduire la marge du conteneur principal -->
   <div class="row justify-content-center">
-    <div class="col-md-6 mb-4">
-      <div class="card shadow p-4">
-        <h2 class="text-center" style="color: #28a745;">Why choose <strong>HomeChef?</strong></h2>
-        <p class="lead text-center mt-3" style="color: #28a745;">Treat yourself to an unforgettable culinary experience, prepared by talented chefs, right at home.</p>
+    <div class="col-md-6 mb-2"> <!-- Réduire la marge en bas de la première carte -->
+      <div class="card transparent-card shadow p-4">
+        <h2 class="text-center" style="color: black;">Hello Chef Next Door !</h2>
+        <p class="lead text-center mt-3" style="color: black;">Treat yourself to an unforgettable culinary experience, prepared by talented chefs, right at home.</p>
         <div class="d-flex justify-content-around mt-4">
-          <%= image_tag "meal_1.jpg", size: "100x100", alt: "Repas délicieux", class: "rounded-circle border border-secondary" %>
-          <%= image_tag "meal_2.jpg", size: "100x100", alt: "Une expérience unique", class: "rounded-circle border border-secondary" %>
-          <%= image_tag "meal_3.jpg", size: "100x100", alt: "Un moment de partage", class: "rounded-circle border border-secondary" %>
+          <%= image_tag "Chef_next_door.png", alt: "Repas délicieux", class: "rounded-circle img-proportional border border-secondary" %>
         </div>
       </div>
     </div>
 
-
-    <div class="col-md-10 mt-5">
-      <div class="card shadow card larger-card p-4 text-center">
-        <h2 class="mb-3" style="color: #28a745;">Discover our <strong>chefs</strong></h2>
+    <div class="col-md-10 mt-4" data-controller="chef-list"> <!-- Réduire la marge en haut -->
+      <div class="card shadow transparent-card2 larger-card p-4 text-center">
         <div class="d-flex justify-content-center">
-          <button class="btn btn-success btn-discover mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#chefList" aria-expanded="false" aria-controls="chefList">
-            Voir la liste des chefs
+          <button
+            class="btn btn-success btn-discover mb-3"
+            type="button"
+            data-action="click->chef-list#showChefs"
+            data-chef-list-target="openButton">
+            Take a look Chef
+          </button>
+
+          <button
+            class="btn btn-danger btn-discover mb-3 d-none"
+            type="button"
+            data-action="click->chef-list#hideChefs"
+            data-chef-list-target="closeButton">
+            Enjoy the meal
           </button>
         </div>
-        <div class="collapse" id="chefList">
+
+        <div class="collapse" id="chefList" data-chef-list-target="chefList">
           <div class="card card-body">
-            <h3 style="color: #28a745;">Nos Chefs</h3>
             <div class="row">
               <% @chefs.each do |chef| %>
                 <div class="col-md-4 mb-3">
-                  <div class="chef-card" data-controller="chef-card" data-chef-card-url-value="<%= user_path(chef) %>">
+                  <div class="chef-card">
                     <div class="chef-image mb-2">
                       <%= image_tag "Chef_Stef.jpeg", alt: "#{chef.name}'s photo", class: "img-fluid rounded" %>
                     </div>
                     <div class="chef-info">
-                      <h4 style="color: #28a745;"><%= chef.name %></h4>
+                      <h4 style="color: black;"><%= chef.name %></h4>
                       <p><%= chef.specialties %></p>
                     </div>
                   </div>

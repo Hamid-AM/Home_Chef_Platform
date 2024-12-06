@@ -3,7 +3,7 @@ background-size: cover;
 background-position: center;
 padding: 0;
 width: 100%;
-height: 500px;
+height: 600px;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -11,21 +11,21 @@ text-align: center;
 position: relative;
 top: 0;
 }
-.banner h1 {
+.banner h1, p {
 margin-bottom: 20px;
 color: white;
 text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 font-size: 32px;
 font-weight: bold;
 }
-.banner a.btn {
-font-size: 18px;
-padding: 10px 20px;
-color: white;
-text-transform: uppercase;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-border-radius: 8px;
-}
+// .banner a.btn {
+// font-size: 18px;
+// padding: 10px 20px;
+// color: white;
+// text-transform: uppercase;
+// box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+// border-radius: 8px;
+// }
 .banner .container {
 display: flex;
 flex-direction: column;
@@ -33,10 +33,10 @@ align-items: center;
 justify-content: center;
 max-width: 80%;
 }
-.banner a.btn {
-transition: transform 0.2s ease, background-color 0.3s ease;
-}
-.banner a.btn:hover {
-transform: scale(1.1);
-background-color: darkgreen; /* Ajuste la couleur si nécessaire */
-}
+// .banner a.btn {
+// transition: transform 0.2s ease, background-color 0.3s ease;
+// }
+// .banner a.btn:hover {
+// transform: scale(1.1);
+// background-color: darkgreen; /* Ajuste la couleur si nécessaire */
+// }
