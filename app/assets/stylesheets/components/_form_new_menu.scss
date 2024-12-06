@@ -1,0 +1,65 @@
+
+.menu-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.menu-form .form-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.menu-form .form-control {
+  border: 1px solid   #FE8F00;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.menu-form .form-control:focus {
+  border-color:    #FE8F00 (34 13% 19%);
+  box-shadow: 0 0 5px #d07d11(40, 167, 69, 0.5);
+}
+
+.btn-custom {
+  background-color: #FE8F00;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+  background-color:#d07d11 ;
+  transform: scale(1.05);
+}
+
+.custom-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.custom-card h1 {
+  color: #d07d11;
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+
+.container-back {
+  background-image: url('/assets/menu.jpg'); /* chemin de l'image  */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}

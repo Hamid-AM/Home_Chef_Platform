@@ -1,14 +1,14 @@
-<%= simple_form_for [@user, @menu] do |f| %>
-  <div class="mb-3">
+<%= simple_form_for [@user, @menu], html: { class: 'menu-form' } do |f| %>
+  <div class="form-group">
     <%= f.input :title, label: "Menu Title", input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
   </div>
-  <div class="mb-3">
-    <%= f.input :description, label: "Description", input_html: { class: 'form-control' }, label_html: { class: 'form-label' }, as: :text %>
+  <div class="form-group">
+    <%= f.input :description, label: "Description", input_html: { class: 'form-control', rows: 5 }, label_html: { class: 'form-label' }, as: :text %>
   </div>
-  <div class="mb-3">
+  <div class="form-group">
     <%= f.input :price, label: "Price ($)", input_html: { class: 'form-control' }, label_html: { class: 'form-label' }, as: :numeric %>
   </div>
-  <div class="d-flex justify-content-between">
-    <%= f.submit "Save Changes", class: 'btn btn-primary' %>
+  <div class="form-actions text-center mt-4">
+    <%= f.submit "Save Changes", class: "btn btn-warning"%>
   </div>
 <% end %>

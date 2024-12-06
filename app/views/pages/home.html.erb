@@ -15,8 +15,10 @@
     <div class="col-md-10 mt-4" data-controller="chef-list"> <!-- Réduire la marge en haut -->
       <div class="card shadow transparent-card2 larger-card p-4 text-center">
         <div class="d-flex justify-content-center">
+
+
           <button
-            class="btn btn-success btn-discover mb-3"
+            class="btn btn-warning btn-discover mb-3"
             type="button"
             data-action="click->chef-list#showChefs"
             data-chef-list-target="openButton">
@@ -24,11 +26,12 @@
           </button>
 
           <button
-            class="btn btn-danger btn-discover mb-3 d-none"
+            class="btn btn-warning btn-discover mb-3 d-none"
             type="button"
             data-action="click->chef-list#hideChefs"
             data-chef-list-target="closeButton">
             Enjoy the meal
+
           </button>
         </div>
 
