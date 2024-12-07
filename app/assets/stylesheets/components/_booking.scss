@@ -1,0 +1,64 @@
+// Bookings list
+.conteneur-bookings {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;
+  margin-top: 10px;
+
+}
+.conteneur-bookings-list {
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement */
+  height: 500px;
+  width: 60%;         /* La hauteur prend toute la hauteur de la fenêtre */
+  background-color: white;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+// Booking table from booking page
+.table-booking {
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px;
+  left: 5%;
+}
+.table-booking th {
+  background-color: #fff3cd;
+  padding: 10px;
+}
+.table-booking a {
+  color: black;
+}
+.table-booking tr {
+  border: 1px solid rgb(218, 217, 217);
+  font-size: 14px;
+  height: 40px;
+}
+.table-booking td {
+  padding: 10px;
+}
+.title-bookings {
+  font-size: 18px;
+  margin-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.title-center {
+  text-align: center;
+}
+.fa-check {
+  color: green;
+  font-size: 20px;
+}
+.fa-check:hover {
+  color: rgb(77, 196, 77);
+}
+.fa-xmark {
+  color: red;
+  padding-left: 10px;
+  font-size: 20px;
+}
+.fa-xmark:hover {
+  color: rgb(245, 148, 148);
+}

@@ -1,31 +1,50 @@
-<h1>Manage Bookings</h1>
+<div class="conteneur-bookings">
+<div class="conteneur-bookings-list">
+<h1 class="title-center">Manage bookings</h1>
 
 <% if current_user.client? %>
-  <h2>Bookings You’ve Made</h2>
-  <ul>
-    <% @bookings.each do |booking| %>
-      <li>
-        <strong>Menu:</strong> <%= link_to booking.menu.title, user_path(booking.menu.user) %><br>
-        <strong>Status:</strong> <%= booking.status %><br>
-        <strong>Date:</strong> <%= booking.date %><br>
-        <strong>Total Price:</strong> <%= number_to_currency(booking.total_price) %><br>
-        <strong>Notes:</strong> <%= booking.notes %>
-      </li>
-    <% end %>
-  </ul>
-<% elsif current_user.chef? %>
-  <h2>Bookings for Your Menus</h2>
-  <ul>
-    <% @bookings.each do |booking| %>
-      <li>
-        <strong>Menu:</strong> <%= link_to booking.menu.title, user_path(current_user) %><br>
-        <strong>Client:</strong> <%= booking.user.name %><br>
-        <strong>Status:</strong> <%= booking.status %><br>
-        <strong>Date:</strong> <%= booking.date %><br>
-        <%= link_to 'Accept', user_booking_path(current_user, booking, status: 'accepted'), data: {turbo_method: :patch}, class: 'btn btn-success btn-sm' %>
-        <%= link_to 'Reject', user_booking_path(current_user, booking, status: 'rejected'), data: {turbo_method: :patch}, class: 'btn btn-danger btn-sm' %>
 
-      </li>
+  <h3 class="title-bookings">Your current bookings</h3>
+  <table class="table-booking">
+    <tr>
+      <th>Menu</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Price</th>
+      <th>Notes</th>
+    </tr>
+    <% @bookings.each do |booking| %>
+      <tr>
+        <td><%= link_to booking.menu.title, user_path(booking.menu.user) %></td>
+        <td><%= booking.status %></td>
+        <td><%= booking.date %></td>
+        <td><%= number_to_currency(booking.total_price) %></td>
+        <td><%= booking.notes %></td>
+      </tr>
     <% end %>
-  </ul>
+  </table>
+
+<% elsif current_user.chef? %>
+  <h3 class="title-bookings">Bookings for Your Menus</h3>
+  <table class="table-booking">
+    <tr>
+      <th>Menu</th>
+      <th>Client</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+    <% @bookings.each do |booking| %>
+      <tr>
+        <td><%= link_to booking.menu.title, user_path(current_user) %><br></td>
+        <td><%= booking.user.name %></td>
+        <td><%= booking.status %></td>
+        <td><%= booking.date %></td>
+        <td><%= link_to user_booking_path(current_user, booking, status: 'accepted'), data: {turbo_method: :patch} do %><i class="fa-solid fa-check"></i><% end%>
+        <%= link_to user_booking_path(current_user, booking, status: 'rejected'), data: {turbo_method: :patch} do %><i class="fa-solid fa-xmark"></i><% end %></td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
+</div>
+</div>
