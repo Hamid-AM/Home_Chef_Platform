@@ -40,7 +40,8 @@
             <div class="row">
               <% @chefs.each do |chef| %>
                 <div class="col-md-4 mb-3">
-                  <div class="chef-card">
+                  <!-- Mise à jour pour utiliser user_path(chef.id) -->
+                  <div class="chef-card" data-controller="chef-card" data-chef-card-url-value="<%= user_path(chef.id) %>">
                     <div class="chef-image mb-2">
                       <%= image_tag "Chef_Stef.jpeg", alt: "#{chef.name}'s photo", class: "img-fluid rounded" %>
                     </div>
